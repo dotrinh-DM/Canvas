@@ -53,21 +53,23 @@ public class DrawText extends View {
 
         textBounds = new Rect();
         textPaint = new TextPaint();
-        textPaint.setTypeface(Typeface.DEFAULT);
+        textPaint.setTypeface(Typeface.SERIF);
         textPaint.setColor(Color.BLACK);
         textPaint.setStyle(Paint.Style.FILL);
         textPaint.setTextAlign(Paint.Align.LEFT);
 //        textPaint.setUnderlineText(true); // TODO: 2019-09-04 chu y khi ve underline
-//        textPaint.setTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD_ITALIC));
+//        textPaint.setTypeface(Typeface.create(Typeface.SERIF, Typeface.BOLD_ITALIC));
         textPaint.setTextSize(Tool.convertSpToPx(getContext(), 110));
         textPaint.setAntiAlias(true);
     }
 
-
     @Override
     protected void onDraw(Canvas canvas) {
         drawMyLine(canvas);
-        drawTextRotateAlignLEFT(canvas);
+//        drawTextRotateAlignLEFT(canvas);
+        drawMeasureTextUnderline(canvas);
+
+
     }
 
     void drawTextRotateAlignLEFT(Canvas canvas) {
@@ -75,6 +77,7 @@ public class DrawText extends View {
             Notes:
             1. textbound la hinh chu nhat vua khit voi text (fit to text content), khong bao gom left va bottom
             2. -textBounds.top = textBounds.height() - textBounds.bottom (text ve tu baseline)
+            3. Khi ve tu phia ben trai la phai ve tu -textBounds.left
         */
 
         textPaint.getTextBounds(textStr, 0, textStr.length(), textBounds);
@@ -93,4 +96,20 @@ public class DrawText extends View {
     void drawMyLine(Canvas canvas) {
         canvas.drawLine(0, 100, getWidth(), 100, LINE_PAINT);
     }
+
+    void drawMeasureTextUnderline(Canvas canvas) {
+        /*
+            Notes:
+            1. Khi ve underline chu y nen dung measure thi do dai text va underline moi bang nhau
+        */
+        textPaint.setUnderlineText(true);
+        textPaint.getTextBounds(textStr, 0, textStr.length(), textBounds);
+        canvas.save();
+        canvas.translate(50, textPaint.measureText(textStr) + 100);
+        canvas.rotate(-90);
+        canvas.drawRect(0, 0, textPaint.measureText(textStr), textBounds.height(), RECT_PAINT);
+        canvas.drawText(textStr, 0, -textBounds.top, textPaint);
+        canvas.restore();
+    }
+
 }
