@@ -21,7 +21,7 @@ public class DrawText extends View {
     static Paint LINE_PAINT;
     Rect textBounds;
     //    private String textStr = "あえおaby";
-    private String textStr = "あいえお";
+    private String textStr = "あう";
 
     public DrawText(Context context) {
         super(context);
@@ -65,7 +65,7 @@ public class DrawText extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        drawMyLine(canvas);
+//        drawMyLine(canvas);
 //        drawTextRotateAlignLEFT(canvas);
         drawMeasureTextUnderline(canvas);
 
@@ -106,7 +106,7 @@ public class DrawText extends View {
         textPaint.getTextBounds(textStr, 0, textStr.length(), textBounds);
         canvas.save();
         canvas.translate(50, textPaint.measureText(textStr) + 100);
-        canvas.rotate(-90);
+        canvas.rotate(0);
         canvas.drawRect(0, 0, textPaint.measureText(textStr), textBounds.height(), RECT_PAINT);
         canvas.drawText(textStr, 0, -textBounds.top, textPaint);
         canvas.restore();
