@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2019. Trinh Thanh Do
+ * Created by dotrinh on 7/22/20 8:04 PM
+ * Copyright (c) 2020. dotr Inc. All rights reserved.
  */
 
 package com.dotrinh.canvas;
@@ -10,6 +11,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.text.Layout;
+import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -20,8 +23,9 @@ public class DrawText extends View {
     static Paint RECT_PAINT;
     static Paint LINE_PAINT;
     Rect textBounds;
-    //    private String textStr = "あえおaby";
-    private String textStr = "あう";
+    private String textStr = "サッカーをする\nビルド中だよね\n　高田　高田馬場\nカタカナボールペン";
+//    private String textStr = "Olivia\n                   \nSmith";
+//    private String textStr = " ";
 
     public DrawText(Context context) {
         super(context);
@@ -40,7 +44,7 @@ public class DrawText extends View {
 
     private void initialize() {
         RECT_PAINT = new Paint();
-        RECT_PAINT.setStrokeWidth(1);
+        RECT_PAINT.setStrokeWidth(3);
         RECT_PAINT.setColor(Color.BLUE);
         RECT_PAINT.setStyle(Paint.Style.STROKE);
         RECT_PAINT.setAntiAlias(true);
@@ -56,20 +60,27 @@ public class DrawText extends View {
         textPaint.setTypeface(Typeface.SERIF);
         textPaint.setColor(Color.BLACK);
         textPaint.setStyle(Paint.Style.FILL);
-        textPaint.setTextAlign(Paint.Align.LEFT);
 //        textPaint.setUnderlineText(true); // TODO: 2019-09-04 chu y khi ve underline
 //        textPaint.setTypeface(Typeface.create(Typeface.SERIF, Typeface.BOLD_ITALIC));
-        textPaint.setTextSize(Tool.convertSpToPx(getContext(), 110));
+        textPaint.setTextSize(Tool.convertSpToPx(getContext(), 33));
         textPaint.setAntiAlias(true);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-//        drawMyLine(canvas);
-//        drawTextRotateAlignLEFT(canvas);
-        drawMeasureTextUnderline(canvas);
+        canvas.translate(50, 200);
 
+        String daiNhat = StringTool.getLongestStringInMultiLines(textStr, textPaint);
+        textPaint.getTextBounds(daiNhat, 0, daiNhat.length(), textBounds);
 
+        StaticLayout.Builder builder = StaticLayout.Builder.obtain(textStr, 0, textStr.length(), textPaint, (int) textPaint.measureText(daiNhat))
+//                .setAlignment(Layout.Alignment.ALIGN_OPPOSITE)
+                .setAlignment(Layout.Alignment.ALIGN_CENTER)
+//                .setAlignment(Layout.Alignment.ALIGN_NORMAL)
+                .setIncludePad(false);
+        StaticLayout myStaticLayout = builder.build();
+        myStaticLayout.draw(canvas);
+        canvas.drawRect(0, 0, myStaticLayout.getWidth(), myStaticLayout.getHeight(), RECT_PAINT);
     }
 
     void drawTextRotateAlignLEFT(Canvas canvas) {
@@ -80,13 +91,13 @@ public class DrawText extends View {
             3. Khi ve tu phia ben trai la phai ve tu -textBounds.left
         */
 
-        textPaint.getTextBounds(textStr, 0, textStr.length(), textBounds);
-        canvas.save();
-        canvas.translate(50, textBounds.width() + 100);
-        canvas.rotate(-90);
-        canvas.drawText(textStr, -textBounds.left, -textBounds.top, textPaint);
-        drawMyRect(canvas);
-        canvas.restore();
+//        textPaint.getTextBounds(textStr, 0, textStr.length(), textBounds);
+//        canvas.save();
+//        canvas.translate(50, textBounds.width() + 100);
+//        canvas.rotate(-90);
+//        canvas.drawText(textStr, -textBounds.left, -textBounds.top, textPaint);
+//        drawMyRect(canvas);
+//        canvas.restore();
     }
 
     void drawMyRect(Canvas canvas) {
@@ -102,14 +113,17 @@ public class DrawText extends View {
             Notes:
             1. Khi ve underline chu y nen dung measure thi do dai text va underline moi bang nhau
         */
-        textPaint.setUnderlineText(true);
-        textPaint.getTextBounds(textStr, 0, textStr.length(), textBounds);
-        canvas.save();
-        canvas.translate(50, textPaint.measureText(textStr) + 100);
-        canvas.rotate(0);
-        canvas.drawRect(0, 0, textPaint.measureText(textStr), textBounds.height(), RECT_PAINT);
-        canvas.drawText(textStr, 0, -textBounds.top, textPaint);
-        canvas.restore();
+//        textPaint.setUnderlineText(true);
+//        textPaint.setTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD_ITALIC));
+//        textPaint.setTextAlign(Paint.Align.RIGHT);
+//        textPaint.getTextBounds(textStr, 0, textStr.length(), textBounds);
+//        canvas.save();
+//        canvas.drawRect(0, 0, textBounds.right, textBounds.height() , RECT_PAINT);
+//        canvas.drawCircle(0,textBounds.height() - textBounds.bottom,40, RECT_PAINT);
+//        canvas.drawText(textStr, 0, -textBounds.top, textPaint);
+//        canvas.restore();
+
+
     }
 
 }

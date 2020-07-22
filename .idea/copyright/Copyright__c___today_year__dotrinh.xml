@@ -1,0 +1,6 @@
+<component name="CopyrightManager">
+  <copyright>
+    <option name="notice" value="Created by &amp;#36;username on &amp;#36;today&#10;Copyright (c) &amp;#36;today.year. dotr Inc. All rights reserved." />
+    <option name="myName" value="Copyright (c) $today.year. dotrinh" />
+  </copyright>
+</component>
