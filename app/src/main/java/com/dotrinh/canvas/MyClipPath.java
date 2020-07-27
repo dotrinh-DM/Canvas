@@ -5,34 +5,40 @@
 
 package com.dotrinh.canvas;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.text.Layout;
-import android.text.StaticLayout;
+import android.os.Handler;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import static com.dotrinh.canvas.MainActivity.dotrinhSize;
-import static com.dotrinh.canvas.StringTool.getTextBoundHeightWithBottom;
+import java.util.concurrent.ThreadLocalRandom;
+
+import static com.dotrinh.canvas.MainActivity.ACTIVE_BITMAP;
+import static com.dotrinh.canvas.MainActivity.ACTIVE_SIZE;
+import static com.dotrinh.canvas.MainActivity.BACKGROUND_BITMAP;
+import static com.dotrinh.canvas.MainActivity.BACKGROUND_SIZE;
+import static com.dotrinh.protool.LogUtil.LogI;
 
 public class MyClipPath extends View {
 
+    static double START_X_PERCENT = 3.54330708661417f;
+    public double startX;
+    static double WIDTH_PERCENT = 95.8661417322835f;
     static Paint RECT_PAINT;
     static Paint LINE_PAINT;
     TextPaint textPaint;
     Rect textBounds = new Rect();
-    Bitmap image;
-    Bitmap image2;
-    Rect dest;
     String testText = "test clip";
+
+
+    Rect backgroundRect;
+    Rect activeRect;
+    Rect clipRect;
 
 
     public MyClipPath(Context context) {
@@ -51,8 +57,6 @@ public class MyClipPath extends View {
     }
 
     private void initialize() {
-        image = BitmapFactory.decodeResource(getResources(), R.drawable.nongthonvn);
-        image2 = BitmapFactory.decodeResource(getResources(), R.drawable.phunuvn);
         RECT_PAINT = new Paint();
         RECT_PAINT.setStrokeWidth(3);
         RECT_PAINT.setColor(Color.BLUE);
@@ -71,26 +75,73 @@ public class MyClipPath extends View {
         textPaint.setStyle(Paint.Style.FILL);
         textPaint.setTextSize(Tool.convertSpToPx(getContext(), 20));
         textPaint.setAntiAlias(true);
+
+//        startTimer();
     }
 
-    @SuppressLint("DrawAllocation")
+    //REAL SIZE CUSTOM VIEW
+    @Override
+    protected void onSizeChanged(int xNew, int yNew, int xOld, int yOld) {
+        super.onSizeChanged(xNew, yNew, xOld, yOld);
+        LogI("-- xOld: " + xOld);
+        LogI("-- yOld: " + yOld);
+        LogI("-- xNew: " + xNew);
+        LogI("-- yNew: " + yNew);
+
+        float factor = (float) xNew / (float) BACKGROUND_SIZE.x;
+
+        backgroundRect = new Rect(0, 0, xNew, (int) (BACKGROUND_SIZE.y * factor));
+
+        activeRect = new Rect(0, 0, (int) ((WIDTH_PERCENT * xNew) / 100f), (int) (ACTIVE_SIZE.y * factor));
+        startX = (float) (START_X_PERCENT * xNew) / 100f;
+
+        clipRect = new Rect(0, 0, xNew, 100);
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
-        float factor = (float) getWidth() / image.getWidth();
-        dest = new Rect(0, 0, getWidth() - 1, (int) (image.getHeight() * factor));
-        canvas.drawBitmap(image, null, dest, null);
-        canvas.translate(330, 330);
-        canvas.clipRect(new Rect(0, 0, 400, 400));
-        canvas.drawColor(Color.WHITE);
-        canvas.drawText(testText, 0, getTextBoundHeightWithBottom(testText, textPaint), textPaint);
+        //BACKGROUND LEVEL
+        canvas.drawBitmap(BACKGROUND_BITMAP, null, backgroundRect, null);
+
+
+        //ACTIVE LEVEL
+        canvas.translate((float) startX, 0);
+//
+        canvas.clipRect(clipRect);
+//        canvas.drawColor(Color.BLUE);
+        canvas.drawBitmap(ACTIVE_BITMAP, null, activeRect, null);
     }
 
-    void drawMyRect(Canvas canvas) {
-        canvas.drawRect(0, 0, textBounds.width(), textBounds.height(), RECT_PAINT);
+    //TIMER
+    private boolean runnableStarted = false;
+    private Handler handler = new Handler();
+    int dem = 0;
+    int randomNum;
+
+    public void startTimer() {
+        runnableStarted = true;
+        handler.postDelayed(runnable, 200);
     }
 
-    void drawMyLine(Canvas canvas) {
-        canvas.drawLine(0, 100, getWidth(), 100, LINE_PAINT);
+    public void stopTimer() {
+        runnableStarted = false;
+        handler.removeCallbacks(runnable);
     }
 
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            if (runnableStarted) {
+                dem++;
+                LogI("..........");
+                LogI("dem: " + dem);
+                startTimer();
+                randomNum = ThreadLocalRandom.current().nextInt(150, 600);
+                invalidate();
+            }
+            if (dem == 1000) {
+                stopTimer();
+            }
+        }
+    };
 }

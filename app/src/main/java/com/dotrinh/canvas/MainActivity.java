@@ -7,6 +7,8 @@ package com.dotrinh.canvas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Window;
@@ -17,6 +19,11 @@ import static com.dotrinh.protool.LogUtil.LogI;
 public class MainActivity extends AppCompatActivity {
 
     public static Point dotrinhSize = new Point();
+    public static Bitmap BACKGROUND_BITMAP;
+    public static Point BACKGROUND_SIZE = null;
+
+    public static Bitmap ACTIVE_BITMAP;
+    public static Point ACTIVE_SIZE = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        BACKGROUND_BITMAP = BitmapFactory.decodeResource(getResources(), R.drawable.levelmeter_bg);
+        BACKGROUND_SIZE = new Point(BACKGROUND_BITMAP.getWidth(), BACKGROUND_BITMAP.getHeight());
+
+        ACTIVE_BITMAP = BitmapFactory.decodeResource(getResources(), R.drawable.active_meter);
+        ACTIVE_SIZE = new Point(ACTIVE_BITMAP.getWidth(), ACTIVE_BITMAP.getHeight());
     }
 
     @Override
