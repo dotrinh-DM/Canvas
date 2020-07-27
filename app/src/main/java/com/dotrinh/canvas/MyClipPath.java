@@ -26,19 +26,16 @@ import static com.dotrinh.protool.LogUtil.LogI;
 
 public class MyClipPath extends View {
 
-    static double START_X_PERCENT = 3.54330708661417f;
-    public double startX;
-    static double WIDTH_PERCENT = 95.8661417322835f;
-    static Paint RECT_PAINT;
-    static Paint LINE_PAINT;
+    public final static double START_X_PERCENT_1 = 3.54330708661417;
+    public final static double START_Y_PERCENT_2 = 36.8421052631579;
+    public static double START_X_1;
+    public static double START_Y_2;
+    public static final double WIDTH_PERCENT = 95.8661417322835;
     TextPaint textPaint;
-    Rect textBounds = new Rect();
-    String testText = "test clip";
-
-
     Rect backgroundRect;
     Rect activeRect;
     Rect clipRect;
+    static double CLIP_RECT_WIDTH;
 
 
     public MyClipPath(Context context) {
@@ -57,26 +54,12 @@ public class MyClipPath extends View {
     }
 
     private void initialize() {
-        RECT_PAINT = new Paint();
-        RECT_PAINT.setStrokeWidth(3);
-        RECT_PAINT.setColor(Color.BLUE);
-        RECT_PAINT.setStyle(Paint.Style.STROKE);
-        RECT_PAINT.setAntiAlias(true);
-
-        LINE_PAINT = new Paint();
-        LINE_PAINT.setStrokeWidth(1);
-        LINE_PAINT.setColor(Color.YELLOW);
-        LINE_PAINT.setStyle(Paint.Style.STROKE);
-        LINE_PAINT.setAntiAlias(true);
-
         textPaint = new TextPaint();
         textPaint.setTypeface(Typeface.SERIF);
         textPaint.setColor(Color.BLUE);
         textPaint.setStyle(Paint.Style.FILL);
         textPaint.setTextSize(Tool.convertSpToPx(getContext(), 20));
         textPaint.setAntiAlias(true);
-
-//        startTimer();
     }
 
     //REAL SIZE CUSTOM VIEW
@@ -93,23 +76,38 @@ public class MyClipPath extends View {
         backgroundRect = new Rect(0, 0, xNew, (int) (BACKGROUND_SIZE.y * factor));
 
         activeRect = new Rect(0, 0, (int) ((WIDTH_PERCENT * xNew) / 100f), (int) (ACTIVE_SIZE.y * factor));
-        startX = (float) (START_X_PERCENT * xNew) / 100f;
+        START_X_1 = (float) (START_X_PERCENT_1 * xNew) / 100f;
+        START_Y_2 = (float) (START_Y_PERCENT_2 * backgroundRect.height()) / 100f;
 
         clipRect = new Rect(0, 0, xNew, 100);
+        CLIP_RECT_WIDTH = xNew;
+        startTimer();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
+        LogI("---- ondraw");
+
         //BACKGROUND LEVEL
         canvas.drawBitmap(BACKGROUND_BITMAP, null, backgroundRect, null);
 
-
-        //ACTIVE LEVEL
-        canvas.translate((float) startX, 0);
-//
+        //LEVEL 1
+        canvas.save();
+        canvas.translate((float) START_X_1, 0);
+        clipRect.set(clipRect.left, clipRect.top, (int) (CLIP_RECT_WIDTH - randomNum), clipRect.bottom);
         canvas.clipRect(clipRect);
-//        canvas.drawColor(Color.BLUE);
+        canvas.drawColor(Color.LTGRAY);
         canvas.drawBitmap(ACTIVE_BITMAP, null, activeRect, null);
+        canvas.restore();
+
+        //LEVEL 2
+        canvas.save();
+        canvas.translate((float) START_X_1, (float) START_Y_2);
+        clipRect.set(clipRect.left, clipRect.top, (int) (CLIP_RECT_WIDTH - randomNum), clipRect.bottom);
+        canvas.clipRect(clipRect);
+        canvas.drawColor(Color.WHITE);
+        canvas.drawBitmap(ACTIVE_BITMAP, null, activeRect, null);
+        canvas.restore();
     }
 
     //TIMER
@@ -133,10 +131,10 @@ public class MyClipPath extends View {
         public void run() {
             if (runnableStarted) {
                 dem++;
-                LogI("..........");
-                LogI("dem: " + dem);
+//                LogI("..........");
+//                LogI("dem: " + dem);
                 startTimer();
-                randomNum = ThreadLocalRandom.current().nextInt(150, 600);
+                randomNum = ThreadLocalRandom.current().nextInt(0, 300);
                 invalidate();
             }
             if (dem == 1000) {
