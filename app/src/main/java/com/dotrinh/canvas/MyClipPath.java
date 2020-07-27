@@ -31,6 +31,9 @@ public class MyClipPath extends View {
     public static double START_X_1;
     public static double START_Y_2;
     public static final double WIDTH_PERCENT = 95.8661417322835;
+    public static double ONE_UNIT_PX;
+    public static double ONE_LEVEL_PERCENT = 0.02083333333333;
+    public static double CONVERT_127_TO_48_LEVELS = 0.37795275590551;
     TextPaint textPaint;
     Rect backgroundRect;
     Rect activeRect;
@@ -64,48 +67,39 @@ public class MyClipPath extends View {
 
     //REAL SIZE CUSTOM VIEW
     @Override
-    protected void onSizeChanged(int xNew, int yNew, int xOld, int yOld) {
-        super.onSizeChanged(xNew, yNew, xOld, yOld);
+    protected void onSizeChanged(int newWidth, int newHeight, int xOld, int yOld) {
+        super.onSizeChanged(newWidth, newHeight, xOld, yOld);
         LogI("-- xOld: " + xOld);
         LogI("-- yOld: " + yOld);
-        LogI("-- xNew: " + xNew);
-        LogI("-- yNew: " + yNew);
+        LogI("-- newWidth: " + newWidth);
+        LogI("-- newHeight: " + newHeight);
 
-        float factor = (float) xNew / (float) BACKGROUND_SIZE.x;
+        ONE_UNIT_PX = newWidth / 48f;
 
-        backgroundRect = new Rect(0, 0, xNew, (int) (BACKGROUND_SIZE.y * factor));
+        float factor = (float) newWidth / (float) BACKGROUND_SIZE.x;
 
-        activeRect = new Rect(0, 0, (int) ((WIDTH_PERCENT * xNew) / 100f), (int) (ACTIVE_SIZE.y * factor));
-        START_X_1 = (float) (START_X_PERCENT_1 * xNew) / 100f;
+        backgroundRect = new Rect(0, 0, newWidth, (int) (BACKGROUND_SIZE.y * factor));
+
+        activeRect = new Rect(0, 0, (int) ((WIDTH_PERCENT * newWidth) / 100f), (int) (ACTIVE_SIZE.y * factor));
+        START_X_1 = (float) (START_X_PERCENT_1 * newWidth) / 100f;
         START_Y_2 = (float) (START_Y_PERCENT_2 * backgroundRect.height()) / 100f;
 
-        clipRect = new Rect(0, 0, xNew, 100);
-        CLIP_RECT_WIDTH = xNew;
+        clipRect = new Rect((int) 0, 0, newWidth, 100);
+        CLIP_RECT_WIDTH = newWidth;
         startTimer();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        LogI("---- ondraw");
-
         //BACKGROUND LEVEL
         canvas.drawBitmap(BACKGROUND_BITMAP, null, backgroundRect, null);
 
         //LEVEL 1
         canvas.save();
         canvas.translate((float) START_X_1, 0);
-        clipRect.set(clipRect.left, clipRect.top, (int) (CLIP_RECT_WIDTH - randomNum), clipRect.bottom);
+        clipRect.set(0, 0, (int) (9 * ONE_LEVEL_PERCENT * activeRect.width()), 100);
         canvas.clipRect(clipRect);
-        canvas.drawColor(Color.LTGRAY);
-        canvas.drawBitmap(ACTIVE_BITMAP, null, activeRect, null);
-        canvas.restore();
-
-        //LEVEL 2
-        canvas.save();
-        canvas.translate((float) START_X_1, (float) START_Y_2);
-        clipRect.set(clipRect.left, clipRect.top, (int) (CLIP_RECT_WIDTH - randomNum), clipRect.bottom);
-        canvas.clipRect(clipRect);
-        canvas.drawColor(Color.WHITE);
+//        canvas.drawColor(Color.WHITE);
         canvas.drawBitmap(ACTIVE_BITMAP, null, activeRect, null);
         canvas.restore();
     }
@@ -115,10 +109,11 @@ public class MyClipPath extends View {
     private Handler handler = new Handler();
     int dem = 0;
     int randomNum;
+    int randomNum2;
 
     public void startTimer() {
         runnableStarted = true;
-        handler.postDelayed(runnable, 200);
+        handler.postDelayed(runnable, 1030);
     }
 
     public void stopTimer() {
@@ -134,7 +129,8 @@ public class MyClipPath extends View {
 //                LogI("..........");
 //                LogI("dem: " + dem);
                 startTimer();
-                randomNum = ThreadLocalRandom.current().nextInt(0, 300);
+                randomNum = ThreadLocalRandom.current().nextInt(0, 127);
+                randomNum2 = ThreadLocalRandom.current().nextInt(0, 127);
                 invalidate();
             }
             if (dem == 1000) {
