@@ -7,6 +7,7 @@ package com.dotrinh.canvas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -14,6 +15,8 @@ import android.view.WindowManager;
 import static com.dotrinh.protool.LogUtil.LogI;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static Point dotrinhSize = new Point();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getWindowManager().getDefaultDisplay().getSize(dotrinhSize);
+    }
 
     @Override
     protected void onDestroy() {
