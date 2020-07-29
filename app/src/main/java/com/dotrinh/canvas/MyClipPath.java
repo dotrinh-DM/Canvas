@@ -26,11 +26,11 @@ import static com.dotrinh.protool.LogUtil.LogI;
 
 public class MyClipPath extends View {
 
-    public final static double START_X_PERCENT_1 = 3.54330708661417;
-    public final static double START_Y_PERCENT_2 = 36.8421052631579;
+    public final static double START_X_PERCENT_1 = 0.0354330708661417;
+    public final static double START_Y_PERCENT_2 = 0.0368421052631579;
     public static double START_X_1;
     public static double START_Y_2;
-    public static final double WIDTH_PERCENT = 95.8661417322835;
+    public static final double WIDTH_PERCENT = 0.95866141732283;
     public static double ONE_UNIT_PX;
     public static double ONE_LEVEL_PERCENT = 0.02083333333333;
     public static double CONVERT_127_TO_48_LEVELS = 0.37795275590551;
@@ -38,7 +38,6 @@ public class MyClipPath extends View {
     Rect backgroundRect;
     Rect activeRect;
     Rect clipRect;
-    static double CLIP_RECT_WIDTH;
 
 
     public MyClipPath(Context context) {
@@ -59,7 +58,7 @@ public class MyClipPath extends View {
     private void initialize() {
         textPaint = new TextPaint();
         textPaint.setTypeface(Typeface.SERIF);
-        textPaint.setColor(Color.BLUE);
+        textPaint.setColor(Color.WHITE);
         textPaint.setStyle(Paint.Style.FILL);
         textPaint.setTextSize(Tool.convertSpToPx(getContext(), 20));
         textPaint.setAntiAlias(true);
@@ -69,37 +68,37 @@ public class MyClipPath extends View {
     @Override
     protected void onSizeChanged(int newWidth, int newHeight, int xOld, int yOld) {
         super.onSizeChanged(newWidth, newHeight, xOld, yOld);
-        LogI("-- xOld: " + xOld);
-        LogI("-- yOld: " + yOld);
-        LogI("-- newWidth: " + newWidth);
-        LogI("-- newHeight: " + newHeight);
-
         ONE_UNIT_PX = newWidth / 48f;
 
-        float factor = (float) newWidth / (float) BACKGROUND_SIZE.x;
+        float factorWidth = (float) newWidth / (float) BACKGROUND_SIZE.x;
+        backgroundRect = new Rect(0, 0, newWidth, (int) (BACKGROUND_SIZE.y * factorWidth));
+        activeRect = new Rect(0, 0, (int) (WIDTH_PERCENT * newWidth), (int) (ACTIVE_SIZE.y * factorWidth));
+        clipRect = new Rect((int) 0, 0, activeRect.width(), activeRect.height());
 
-        backgroundRect = new Rect(0, 0, newWidth, (int) (BACKGROUND_SIZE.y * factor));
-
-        activeRect = new Rect(0, 0, (int) ((WIDTH_PERCENT * newWidth) / 100f), (int) (ACTIVE_SIZE.y * factor));
-        START_X_1 = (float) (START_X_PERCENT_1 * newWidth) / 100f;
-        START_Y_2 = (float) (START_Y_PERCENT_2 * backgroundRect.height()) / 100f;
-
-        clipRect = new Rect((int) 0, 0, newWidth, 100);
-        CLIP_RECT_WIDTH = newWidth;
-        startTimer();
+        START_X_1 = (float) (START_X_PERCENT_1 * newWidth);
+        START_Y_2 = (float) (START_Y_PERCENT_2 * backgroundRect.height());
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        //BACKGROUND LEVEL
-        canvas.drawBitmap(BACKGROUND_BITMAP, null, backgroundRect, null);
-
-        //LEVEL 1
         canvas.save();
-        canvas.translate((float) START_X_1, 0);
-        clipRect.set(0, 0, (int) (9 * ONE_LEVEL_PERCENT * activeRect.width()), 100);
-        canvas.clipRect(clipRect);
+        //BACKGROUND LEVEL
+        canvas.translate(0, 100);
+        canvas.drawBitmap(BACKGROUND_BITMAP, null, backgroundRect, null);
+        canvas.restore();
+
+        //demo WHITE
+//        canvas.save();
+//        canvas.translate((float) START_X_1, 140);
+//        canvas.clipRect(new Rect(0, 0, activeRect.width(), activeRect.height()));
 //        canvas.drawColor(Color.WHITE);
+//        canvas.restore();
+
+        //active BITMAP
+        canvas.save();
+        canvas.translate((float) START_X_1, 100);
+        int widthVisible = (int) (randomNum * ONE_LEVEL_PERCENT * activeRect.width());
+        canvas.clipRect(new Rect(0, 0, widthVisible, activeRect.height()));
         canvas.drawBitmap(ACTIVE_BITMAP, null, activeRect, null);
         canvas.restore();
     }
@@ -107,13 +106,12 @@ public class MyClipPath extends View {
     //TIMER
     private boolean runnableStarted = false;
     private Handler handler = new Handler();
-    int dem = 0;
+    int testID = 0;
     int randomNum;
-    int randomNum2;
 
     public void startTimer() {
         runnableStarted = true;
-        handler.postDelayed(runnable, 1030);
+        handler.postDelayed(runnable, 230);
     }
 
     public void stopTimer() {
@@ -125,16 +123,12 @@ public class MyClipPath extends View {
         @Override
         public void run() {
             if (runnableStarted) {
-                dem++;
-//                LogI("..........");
-//                LogI("dem: " + dem);
+                testID++;
+                LogI("..........");
+                LogI("testID: " + testID);
                 startTimer();
-                randomNum = ThreadLocalRandom.current().nextInt(0, 127);
-                randomNum2 = ThreadLocalRandom.current().nextInt(0, 127);
+                randomNum = ThreadLocalRandom.current().nextInt(39, 48);
                 invalidate();
-            }
-            if (dem == 1000) {
-                stopTimer();
             }
         }
     };

@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         ACTIVE_BITMAP = BitmapFactory.decodeResource(getResources(), R.drawable.active_meter);
         ACTIVE_SIZE = new Point(ACTIVE_BITMAP.getWidth(), ACTIVE_BITMAP.getHeight());
+        MyClipPath level = findViewById(R.id.Level);
+        level.startTimer();
     }
 
     @Override
