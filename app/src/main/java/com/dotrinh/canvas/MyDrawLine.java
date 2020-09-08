@@ -61,6 +61,7 @@ public class MyDrawLine extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         // TODO: 2020/09/09 maybe use canvas.drawLines() is better
+        // TODO: 2020/09/09 maybe performance: canvas.drawPath > canvas.drawLines
         canvas.drawLine(20, centerY, 20, centerY - (int) ((Math.random() * (200))), textPaint);
         canvas.drawLine(30, centerY, 30, centerY - (int) ((Math.random() * (200))), textPaint);
         canvas.drawLine(40, centerY, 40, centerY - (int) ((Math.random() * (200))), textPaint);
