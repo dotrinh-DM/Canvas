@@ -16,6 +16,8 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import static com.dotrinh.protool.LogUtil.LogI;
+
 public class MyPath extends View {
 
     TextPaint textPaint;
@@ -56,16 +58,21 @@ public class MyPath extends View {
         super.onSizeChanged(newWidth, newHeight, xOld, yOld);
     }
 
+    int maxLine = 100;
+
     @Override
     protected void onDraw(Canvas canvas) {
         Path p = new Path();
         p.moveTo(20, 20);
-        p.lineTo(30, 200);
-        p.lineTo(40, 20);
-        p.lineTo(50, 200);
-        p.lineTo(60, 20);
-        p.lineTo(70, 200);
-        p.lineTo(80, 20);
+//        p.lineTo(30, 200);
+//        p.lineTo(40, 20);
+//        p.lineTo(50, 200);
+//        p.lineTo(60, 20);
+//        p.lineTo(70, 200);
+//        p.lineTo(80, 20);
+        for (int j = 30; j < 10000; j += 10) {
+            p.lineTo(j, 200 + (int) ((Math.random() * (200))));
+        }
         canvas.drawPath(p, textPaint);
     }
 }
