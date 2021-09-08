@@ -3,7 +3,7 @@
  * Copyright (c) 2020. dotr Inc. All rights reserved.
  */
 
-package com.dotrinh.canvas;
+package com.dotrinh.canvas.draw_lines;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -17,6 +17,8 @@ import android.util.FloatMath;
 import android.view.View;
 
 import static com.dotrinh.protool.LogUtil.LogI;
+
+import com.dotrinh.canvas.Tool;
 
 public class MyDrawLine extends View {
 

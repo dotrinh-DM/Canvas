@@ -3,7 +3,7 @@
  * Copyright (c) 2020. dotr Inc. All rights reserved.
  */
 
-package com.dotrinh.canvas;
+package com.dotrinh.canvas.draw_lines;
 
 import android.graphics.Point;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.dotrinh.canvas.R;
 
 public class DrawLineActivity extends AppCompatActivity {
 
