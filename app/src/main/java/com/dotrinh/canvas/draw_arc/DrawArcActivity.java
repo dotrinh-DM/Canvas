@@ -42,6 +42,7 @@ class MyArc extends View {
     TextPaint textPaint;
     Paint myPaint;
     Paint borderPaint;
+    Rect testRect;
 
     public MyArc(Context context) {
         super(context);
@@ -59,6 +60,7 @@ class MyArc extends View {
     }
 
     private void initialize() {
+
         textPaint = new TextPaint();
         textPaint.setTypeface(Typeface.SERIF);
         textPaint.setStrokeWidth(7);
@@ -70,12 +72,14 @@ class MyArc extends View {
 
         myPaint = new Paint();
         myPaint.setColor(getResources().getColor(R.color.colorAccent, null));
+        myPaint.setAntiAlias(true);
 
         borderPaint = new Paint();
         borderPaint.setStrokeWidth(80);
-        borderPaint.setStyle(Paint.Style.STROKE);
-        borderPaint.setColor(Color.BLUE);
+        borderPaint.setStyle(Paint.Style.FILL);
+        borderPaint.setColor(Color.YELLOW);
         borderPaint.setStrokeCap(Paint.Cap.ROUND);
+        borderPaint.setAntiAlias(true);
     }
 
     @Override
@@ -85,16 +89,15 @@ class MyArc extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+//        canvas.rotate(-10);
+        testRect = new Rect(getWidth()/2 - 200, getHeight()/2 - 200, getWidth()/2 + 200, getHeight()/2 + 200);
         canvas.drawRect(0, 0, getWidth(), getHeight(), borderPaint); //full fill
-        Rect testRect = new Rect(130, 130, 600, 600);
-        canvas.drawCircle(130, 130, 20, textPaint);
-        canvas.drawCircle(600, 600, 20, textPaint);
+        canvas.drawCircle(testRect.left, testRect.top, 20, textPaint);
+        canvas.drawCircle(testRect.right, testRect.bottom, 20, textPaint);
         canvas.drawCircle(testRect.centerX(), testRect.centerY(), 5, textPaint);
-
-        canvas.drawArc(testRect.left,testRect.top,testRect.right, testRect.bottom, 0, 360, true,  myPaint);
-        myPaint.setColor(Color.parseColor("#fcba03"));
-        canvas.drawArc(testRect.left,testRect.top,testRect.right, testRect.bottom, 45, 45, true,  myPaint);
-
+        canvas.drawArc(testRect.left,testRect.top,testRect.right, testRect.bottom, 0, 40, true,  myPaint);
+//        myPaint.setColor(Color.parseColor("#fcba03"));
+//        canvas.drawArc(testRect.left,testRect.top,testRect.right, testRect.bottom, 45, 45, true,  myPaint);
         canvas.drawCircle(testRect.centerX(), testRect.centerY(), testRect.width()/2f, textPaint);
         canvas.drawRect(testRect, textPaint);
     }
