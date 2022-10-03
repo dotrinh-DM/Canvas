@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.dotrinh.canvas.draw_arc.DrawArcActivity" >
+        <activity android:name="com.dotrinh.canvas.circle_progress.CPActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
