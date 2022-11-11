@@ -1,8 +1,9 @@
 /*
- * Copyright (c) 2019. Trinh Thanh Do
+ * Created by dotrinh on 13:20, 11/11/2022
+ * Copyright (c) 2022. dotr Inc. All rights reserved.
  */
 
-package com.dotrinh.canvas;
+package com.dotrinh.canvas.draw_text;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -48,7 +49,7 @@ public class DrawTextVertical extends View {
         initialize();
     }
 
-    TextItem t;
+    TextItem textItem;
     private void initialize() {
         RECT_PAINT = new Paint();
         RECT_PAINT.setStrokeWidth(1);
@@ -59,21 +60,21 @@ public class DrawTextVertical extends View {
         textBounds = new Rect();
         textPaint = new TextPaint();
         textPaint.setTypeface(Typeface.DEFAULT);
-        textPaint.setColor(Color.BLACK);
+        textPaint.setColor(Color.WHITE);
         textPaint.setStyle(Paint.Style.FILL);
         textPaint.setTextAlign(Paint.Align.LEFT);
-        textPaint.setTextSize(Tool.convertSpToPx(getContext(), 20));
+        textPaint.setTextSize(Tool.convertSpToPx(getContext(), 30));
         textPaint.setAntiAlias(true);
 
-        t = new TextItem();
-        t.txt = textStr;
-        t.isVertical = true;
-        t.process();
+        textItem = new TextItem();
+        textItem.txt = textStr;
+        textItem.isVertical = true;
+        textItem.process();
     }
 
     @Override
     protected void onDraw(Canvas canvas){
-        t.drawText(canvas);
+        textItem.drawText(canvas);
     }
 //
 //    void drawText(Canvas canvas) {
@@ -140,7 +141,7 @@ public class DrawTextVertical extends View {
             }
             canvas.restore();
             textPaint.setTextSize(88);
-            canvas.drawText("hihihi高田",0,StringTool.getTextBoundHeightWithBottom("hihihi",textPaint),textPaint);
+            // canvas.drawText("hihihi高田",0,StringTool.getTextBoundHeightWithBottom("hihihi",textPaint),textPaint);
         }
     }
 
