@@ -3,7 +3,7 @@
  * Copyright (c) 2020. dotr Inc. All rights reserved.
  */
 
-package com.dotrinh.canvas;
+package com.dotrinh.canvas.LED;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -18,15 +18,15 @@ import android.view.View;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import static com.dotrinh.canvas.MainActivity.ACTIVE_BITMAP;
-import static com.dotrinh.canvas.MainActivity.ACTIVE_SIZE;
-import static com.dotrinh.canvas.MainActivity.BACKGROUND_BITMAP;
-import static com.dotrinh.canvas.MainActivity.BACKGROUND_SIZE;
+import static com.dotrinh.canvas.LED.LED_MainActivity.ACTIVE_BITMAP;
+import static com.dotrinh.canvas.LED.LED_MainActivity.ACTIVE_SIZE;
+import static com.dotrinh.canvas.LED.LED_MainActivity.BACKGROUND_BITMAP;
+import static com.dotrinh.canvas.LED.LED_MainActivity.BACKGROUND_SIZE;
 import static com.dotrinh.protool.LogUtil.LogI;
 
 import com.dotrinh.canvas.tool.Tool;
 
-public class MyClipPath extends View {
+public class MyClipPath_LED extends View {
 
     public final static double START_X_PERCENT_1 = 0.0354330708661417;
     public final static double START_Y_PERCENT_2 = 0.0368421052631579;
@@ -42,17 +42,17 @@ public class MyClipPath extends View {
     Rect clipRect;
 
 
-    public MyClipPath(Context context) {
+    public MyClipPath_LED(Context context) {
         super(context);
         initialize();
     }
 
-    public MyClipPath(Context context, AttributeSet attrs, int defStyle) {
+    public MyClipPath_LED(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initialize();
     }
 
-    public MyClipPath(Context context, AttributeSet attrs) {
+    public MyClipPath_LED(Context context, AttributeSet attrs) {
         super(context, attrs);
         initialize();
     }

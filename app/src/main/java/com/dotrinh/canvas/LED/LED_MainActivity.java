@@ -3,7 +3,7 @@
  * Copyright (c) 2020. dotr Inc. All rights reserved.
  */
 
-package com.dotrinh.canvas;
+package com.dotrinh.canvas.LED;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,13 +11,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 import static com.dotrinh.protool.LogUtil.LogI;
 
-public class MainActivity extends AppCompatActivity {
+import com.dotrinh.canvas.R;
+
+public class LED_MainActivity extends AppCompatActivity {
 
     public static Point dotrinhSize = new Point();
     public static Bitmap BACKGROUND_BITMAP;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         ACTIVE_BITMAP = BitmapFactory.decodeResource(getResources(), R.drawable.active_meter);
         ACTIVE_SIZE = new Point(ACTIVE_BITMAP.getWidth(), ACTIVE_BITMAP.getHeight());
-        MyClipPath level = findViewById(R.id.Level);
+        MyClipPath_LED level = findViewById(R.id.Level);
         level.startTimer();
     }
 

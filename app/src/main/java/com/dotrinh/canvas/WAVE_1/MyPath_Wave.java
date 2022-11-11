@@ -3,7 +3,7 @@
  * Copyright (c) 2020. dotr Inc. All rights reserved.
  */
 
-package com.dotrinh.canvas;
+package com.dotrinh.canvas.WAVE_1;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -18,7 +18,7 @@ import android.view.View;
 
 import com.dotrinh.canvas.tool.Tool;
 
-public class MyPath extends View {
+public class MyPath_Wave extends View {
 
     TextPaint textPaint;
     Rect backgroundRect;
@@ -26,17 +26,17 @@ public class MyPath extends View {
     Rect clipRect;
 
 
-    public MyPath(Context context) {
+    public MyPath_Wave(Context context) {
         super(context);
         initialize();
     }
 
-    public MyPath(Context context, AttributeSet attrs, int defStyle) {
+    public MyPath_Wave(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initialize();
     }
 
-    public MyPath(Context context, AttributeSet attrs) {
+    public MyPath_Wave(Context context, AttributeSet attrs) {
         super(context, attrs);
         initialize();
     }

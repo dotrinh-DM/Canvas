@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".LED.LED_MainActivity">
 
-    <com.dotrinh.canvas.MyPath
+    <com.dotrinh.canvas.WAVE_1.MyPath_Wave
         android:id="@+id/Level"
         android:layout_width="0dp"
         android:layout_height="0dp"
