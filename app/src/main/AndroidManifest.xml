@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.dotrinh.canvas.draw_LED.LED_MainActivity" > <!-- change this-->
+        <activity android:name="com.dotrinh.canvas.draw_arc.draw_knob.DrawKnobActivity" >
+<!--        <activity android:name="com.dotrinh.canvas.draw_arc.DrawArcActivity" >-->
+<!--        <activity android:name="com.dotrinh.canvas.draw_LED.LED_MainActivity" >-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
