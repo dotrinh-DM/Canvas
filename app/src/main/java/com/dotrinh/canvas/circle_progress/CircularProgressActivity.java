@@ -29,7 +29,7 @@ import com.dotrinh.canvas.R;
 import com.dotrinh.canvas.Tool;
 import com.dotrinh.protool.LogUtil;
 
-public class CPActivity extends AppCompatActivity {
+public class CircularProgressActivity extends AppCompatActivity {
 
     public static Point dotrinhSize = new Point();
     public Context context;
