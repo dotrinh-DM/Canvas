@@ -13,12 +13,9 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.FloatMath;
 import android.view.View;
 
-import static com.dotrinh.protool.LogUtil.LogI;
-
-import com.dotrinh.canvas.Tool;
+import com.dotrinh.canvas.tool.Tool;
 
 public class MyDrawLine extends View {
 

@@ -3,7 +3,7 @@
  * Copyright (c) 2020. dotr Inc. All rights reserved.
  */
 
-package com.dotrinh.canvas;
+package com.dotrinh.canvas.WAVE_1;
 
 import android.graphics.Point;
 import android.os.Bundle;
@@ -12,7 +12,9 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class PathActivity extends AppCompatActivity {
+import com.dotrinh.canvas.R;
+
+public class PathWaveActivity extends AppCompatActivity {
 
     public static Point dotrinhSize = new Point();
 

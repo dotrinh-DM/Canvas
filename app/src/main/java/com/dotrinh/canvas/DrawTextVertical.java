@@ -16,15 +16,13 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.dotrinh.canvas.tool.Tool;
 import com.dotrinh.protool.StringTool;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static com.dotrinh.protool.StringTool.findMaxWidthOfInTextBound;
-import static java.lang.System.in;
 
 public class DrawTextVertical extends View {
 

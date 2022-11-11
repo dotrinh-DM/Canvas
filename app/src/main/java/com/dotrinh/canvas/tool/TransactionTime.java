@@ -1,9 +1,9 @@
 /*
- * Created by dotrinh on 7/21/20 12:28 PM
- * Copyright (c) 2020. USE Inc. All rights reserved.
+ * Created by dotrinh on 11:41, 11/11/2022
+ * Copyright (c) 2022. dotr Inc. All rights reserved.
  */
 
-package com.dotrinh.canvas;
+package com.dotrinh.canvas.tool;
 
 public class TransactionTime {
     private long start;
