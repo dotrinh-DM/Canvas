@@ -16,7 +16,7 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import static com.dotrinh.protool.LogUtil.LogI;
+import com.dotrinh.canvas.tool.Tool;
 
 public class MyPath extends View {
 

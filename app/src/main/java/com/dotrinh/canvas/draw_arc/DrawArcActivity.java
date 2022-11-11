@@ -22,7 +22,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dotrinh.canvas.R;
-import com.dotrinh.canvas.Tool;
+import com.dotrinh.canvas.tool.Tool;
 
 public class DrawArcActivity extends AppCompatActivity {
 
@@ -60,7 +60,6 @@ class MyArc extends View {
     }
 
     private void initialize() {
-
         textPaint = new TextPaint();
         textPaint.setTypeface(Typeface.SERIF);
         textPaint.setStrokeWidth(7);
@@ -77,7 +76,7 @@ class MyArc extends View {
         borderPaint = new Paint();
         borderPaint.setStrokeWidth(80);
         borderPaint.setStyle(Paint.Style.FILL);
-        borderPaint.setColor(Color.YELLOW);
+        borderPaint.setColor(Color.LTGRAY);
         borderPaint.setStrokeCap(Paint.Cap.ROUND);
         borderPaint.setAntiAlias(true);
     }

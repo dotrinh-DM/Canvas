@@ -26,7 +26,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dotrinh.canvas.R;
-import com.dotrinh.canvas.Tool;
+import com.dotrinh.canvas.tool.Tool;
 import com.dotrinh.protool.LogUtil;
 
 public class CircularProgressActivity extends AppCompatActivity {

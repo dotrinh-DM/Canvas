@@ -24,6 +24,8 @@ import static com.dotrinh.canvas.MainActivity.BACKGROUND_BITMAP;
 import static com.dotrinh.canvas.MainActivity.BACKGROUND_SIZE;
 import static com.dotrinh.protool.LogUtil.LogI;
 
+import com.dotrinh.canvas.tool.Tool;
+
 public class MyClipPath extends View {
 
     public final static double START_X_PERCENT_1 = 0.0354330708661417;

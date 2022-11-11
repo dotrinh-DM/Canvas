@@ -9,14 +9,15 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import static com.dotrinh.canvas.LogUtil.LogI;
+import static com.dotrinh.canvas.tool.LogUtil.LogI;
+
+import com.dotrinh.canvas.tool.Tool;
 
 public class MyRect extends View {
 

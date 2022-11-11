@@ -17,6 +17,9 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.dotrinh.canvas.tool.StringTool;
+import com.dotrinh.canvas.tool.Tool;
+
 public class DrawText extends View {
 
     TextPaint textPaint;
