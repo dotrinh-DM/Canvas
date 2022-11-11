@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LED.LED_MainActivity">
+    tools:context=".draw_LED.LED_MainActivity">
 
     <com.dotrinh.canvas.draw_text.DrawText
         android:id="@+id/Level"

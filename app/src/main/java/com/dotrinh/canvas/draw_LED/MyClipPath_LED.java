@@ -3,7 +3,7 @@
  * Copyright (c) 2020. dotr Inc. All rights reserved.
  */
 
-package com.dotrinh.canvas.LED;
+package com.dotrinh.canvas.draw_LED;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -18,10 +18,10 @@ import android.view.View;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import static com.dotrinh.canvas.LED.LED_MainActivity.ACTIVE_BITMAP;
-import static com.dotrinh.canvas.LED.LED_MainActivity.ACTIVE_SIZE;
-import static com.dotrinh.canvas.LED.LED_MainActivity.BACKGROUND_BITMAP;
-import static com.dotrinh.canvas.LED.LED_MainActivity.BACKGROUND_SIZE;
+import static com.dotrinh.canvas.draw_LED.LED_MainActivity.ACTIVE_BITMAP;
+import static com.dotrinh.canvas.draw_LED.LED_MainActivity.ACTIVE_SIZE;
+import static com.dotrinh.canvas.draw_LED.LED_MainActivity.BACKGROUND_BITMAP;
+import static com.dotrinh.canvas.draw_LED.LED_MainActivity.BACKGROUND_SIZE;
 import static com.dotrinh.protool.LogUtil.LogI;
 
 import com.dotrinh.canvas.tool.Tool;

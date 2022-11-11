@@ -3,7 +3,7 @@
  * Copyright (c) 2020. dotr Inc. All rights reserved.
  */
 
-package com.dotrinh.canvas.WAVE_1;
+package com.dotrinh.canvas.draw_WAVE_1;
 
 import android.graphics.Point;
 import android.os.Bundle;
@@ -23,6 +23,6 @@ public class PathWaveActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.path);
+        setContentView(R.layout.wave_path);
     }
 }

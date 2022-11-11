@@ -4,17 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LED.LED_MainActivity">
+    tools:context=".draw_LED.LED_MainActivity">
 
-    <com.dotrinh.canvas.WAVE_1.MyPath_Wave
+    <com.dotrinh.canvas.draw_LED.MyClipPath_LED
         android:id="@+id/Level"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="10dp"
-        android:background="#EDE6E6"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

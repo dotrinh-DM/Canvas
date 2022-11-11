@@ -3,7 +3,7 @@
  * Copyright (c) 2020. dotr Inc. All rights reserved.
  */
 
-package com.dotrinh.canvas;
+package com.dotrinh.canvas.draw_rect;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -58,10 +58,10 @@ public class MyRect extends View {
     @Override
     protected void onSizeChanged(int newWidth, int newHeight, int xOld, int yOld) {
         super.onSizeChanged(newWidth, newHeight, xOld, yOld);
-        int l = newWidth / 2;
-        int t = newHeight / 2;
-        int r = newWidth / 2 + 100;
-        myRect = new Rect(l, t, r, newHeight / 2 + 100);
+        int l = 50;
+        int t = 50;
+        int r = newWidth / 2 + 300;
+        myRect = new Rect(l, t, r, newHeight / 2 + 300);
         this.newWidth = newWidth;
         this.newHeight = newHeight;
     }
@@ -70,7 +70,7 @@ public class MyRect extends View {
     protected void onDraw(Canvas canvas) {
         if (myRect != null) {
             canvas.drawRect(myRect, textPaint);
-            canvas.drawCircle(myRect.centerX(), myRect.centerY(), 9, textPaint);
+            canvas.drawCircle(myRect.centerX(), myRect.centerY(), 12, textPaint);
             LogI(":l : " + myRect.left);
             LogI(":r : " + myRect.right);
             LogI(":: " + myRect.width());

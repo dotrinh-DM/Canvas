@@ -1,8 +1,7 @@
 /*
- * Created by dotrinh on 11:41, 11/11/2022
- * Copyright (c) 2022. dotr Inc. All rights reserved.
+ * Created by dotrinh on 6/30/20 8:27 PM
+ * Copyright (c) 2020. dotr Inc. All rights reserved.
  */
-
 package com.dotrinh.canvas.tool;
 
 import android.content.Context;

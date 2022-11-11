@@ -3,7 +3,7 @@
  * Copyright (c) 2020. dotr Inc. All rights reserved.
  */
 
-package com.dotrinh.canvas.WAVE_1;
+package com.dotrinh.canvas.draw_WAVE_1;
 
 import android.content.Context;
 import android.graphics.Canvas;

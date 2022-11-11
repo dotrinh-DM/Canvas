@@ -3,7 +3,7 @@
  * Copyright (c) 2020. dotr Inc. All rights reserved.
  */
 
-package com.dotrinh.canvas.LED;
+package com.dotrinh.canvas.draw_LED;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,7 +32,7 @@ public class LED_MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.led);
 
         BACKGROUND_BITMAP = BitmapFactory.decodeResource(getResources(), R.drawable.levelmeter_bg);
         BACKGROUND_SIZE = new Point(BACKGROUND_BITMAP.getWidth(), BACKGROUND_BITMAP.getHeight());
