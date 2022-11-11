@@ -8,8 +8,8 @@ package com.dotrinh.canvas.draw_arc.draw_knob;
 import static android.view.MotionEvent.INVALID_POINTER_ID;
 import static com.dotrinh.canvas.tool.LogUtil.LogI;
 import static com.dotrinh.canvas.tool.StringTool.getTextBoundHeightWithBottom;
-import static com.dotrinh.protool.StringTool.getTextBoundWidthOfString;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -57,7 +57,7 @@ public class MyKnob extends View implements View.OnTouchListener {
         textPaint = new TextPaint();
         textPaint.setTypeface(Typeface.SERIF);
         textPaint.setStrokeWidth(7);
-        textPaint.setTextSize(Tool.convertSpToPx(getContext(), 20));
+        textPaint.setTextSize(Tool.convertSpToPx(getContext(), 40));
         textPaint.setAntiAlias(true);
         textPaint.setPathEffect(null);
         textPaint.setColor(Color.BLUE);
@@ -78,54 +78,85 @@ public class MyKnob extends View implements View.OnTouchListener {
 
         circle_paint = new Paint();
         circle_paint.setStyle(Paint.Style.FILL);
-        circle_paint.setColor(Color.GRAY);
+        circle_paint.setColor(Color.LTGRAY);
         circle_paint.setStrokeCap(Paint.Cap.ROUND);
         circle_paint.setAntiAlias(true);
 
         // img shape paint
         imgShapePaint = new Paint();
         imgShapePaint.setAntiAlias(true);
+        imgShapePaint.setColor(Color.BLACK);
+
     }
 
-    int size = 200;
+    int size = 400;
+    final int radius = size - 50;
     float degree = 0;
-    String center_string;
+
+    //single txt or img
+    String center_string = "x3";
     Paint imgShapePaint;
     public Bitmap center_bitmap;
     public Rect bitmap_rect = new Rect(0, 0, 200, 200);
 
+    //txt & img group
+    public Bitmap left_bmp;
+    public Rect left_bmp_rect = new Rect();
+    public Rect right_txt_rect = new Rect();
+    public Rect bmp_txt_grp_rect = new Rect(0, 0, (int) (radius * 1.55f), radius);
+
     @Override
     protected void onSizeChanged(int newWidth, int newHeight, int xOld, int yOld) {
         super.onSizeChanged(newWidth, newHeight, xOld, yOld);
-        // testRect = new Rect(getWidth() / 2 - 200, getHeight() / 2 - 200, getWidth() / 2 + 200, getHeight() / 2 + 200);
         int left = getWidth() / 2 - size;
         int top = getHeight() / 2 - size;
         testRect = new RectF(left, top, getWidth() / 2f + size, getHeight() / 2f + size);
-        dx_dy.right = 0;
+        dx_dy.right = (int) (0.7 * max_val);
         calculate_degree();
     }
 
+    @SuppressLint("DrawAllocation")
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawRect(0, 0, getWidth(), getHeight(), BG_paint); //full fill
         canvas.drawRect(testRect, textPaint);
         canvas.drawArc(testRect, 135, degree, true, myPaint);//realtime
-        canvas.drawCircle(testRect.centerX(), testRect.centerY(), size - 50, circle_paint); //big circle layer
-        // canvas.drawCircle(testRect.centerX(), testRect.centerY(), 5, textPaint); //test dot
+        canvas.drawCircle(testRect.centerX(), testRect.centerY(), radius, circle_paint); //big circle layer
+        // canvas.drawCircle(testRect.centerX(), testRect.centerY(), 15, textPaint); //test dot
 
-        //center text
+        //-----------------center text
         // float xTxt = testRect.centerX() - getTextBoundWidthOfString(center_string, textPaint) / 2f;
         // float yTxt = (testRect.top + (testRect.height() / 2f + getTextBoundHeightWithBottom(center_string, textPaint) / 2f));
         // canvas.drawText(center_string, xTxt, yTxt, textPaint);
 
-        //center image
-        float xBmp = testRect.centerX() - bitmap_rect.width() / 2f;
-        float yBmp = testRect.centerY() - bitmap_rect.height() / 2f;
-        bitmap_rect = new Rect((int) xBmp, (int) yBmp, (int) (xBmp + bitmap_rect.width()), (int) (yBmp + bitmap_rect.height()));
-        canvas.drawRect(bitmap_rect, textPaint);
-        canvas.drawBitmap(center_bitmap, new Rect(0, 0, center_bitmap.getWidth(), center_bitmap.getHeight()), bitmap_rect, imgShapePaint);
+        //-----------------center image
+        // float xBmp = testRect.centerX() - bitmap_rect.width() / 2f;
+        // float yBmp = testRect.centerY() - bitmap_rect.height() / 2f;
+        // bitmap_rect = new Rect((int) xBmp, (int) yBmp, (int) (xBmp + bitmap_rect.width()), (int) (yBmp + bitmap_rect.height()));
+        // canvas.drawRect(bitmap_rect, textPaint);
+        // canvas.drawBitmap(center_bitmap, new Rect(0, 0, center_bitmap.getWidth(), center_bitmap.getHeight()), bitmap_rect, imgShapePaint);
 
-        //center image & text
+        //-----------------center image & text group
+        float xGrp = testRect.centerX() - bmp_txt_grp_rect.width() / 2f;
+        float yGrp = testRect.centerY() - bmp_txt_grp_rect.height() / 2f;
+        bmp_txt_grp_rect = new Rect((int) xGrp, (int) yGrp, (int) (xGrp + bmp_txt_grp_rect.width()), (int) (yGrp + bmp_txt_grp_rect.height()));
+        // canvas.drawRect(bmp_txt_grp_rect, textPaint);
+            // textPaint.setTextSize(bmp_txt_grp_rect.width()/4f);
+
+            //right bmp
+            int yVertical_bmp = (int) (bmp_txt_grp_rect.top + (bmp_txt_grp_rect.height() / 2f - left_bmp.getHeight() / 2f)); //draw from top - left
+            left_bmp_rect = new Rect((int) xGrp, yVertical_bmp, (int) (xGrp + left_bmp.getWidth()), (int) (yVertical_bmp + left_bmp.getHeight()));
+            // canvas.drawRect(left_bmp_rect, imgShapePaint);//black bg
+            canvas.drawBitmap(left_bmp, new Rect(0, 0, left_bmp.getWidth(), left_bmp.getHeight()), left_bmp_rect, imgShapePaint);
+
+            //left text
+            float yTxt_2 = (bmp_txt_grp_rect.top + (bmp_txt_grp_rect.height() / 2f + getTextBoundHeightWithBottom(center_string, textPaint)/2f)); //draw from baseline
+            right_txt_rect = new Rect((int) left_bmp_rect.right, left_bmp_rect.top, bmp_txt_grp_rect.right, (int) yTxt_2);
+            // canvas.drawRect(right_txt_rect, imgShapePaint);//black bg
+            canvas.drawText(center_string, left_bmp_rect.right, yTxt_2, textPaint);
+
+        // float textWidthFactor = getTextBoundWidthOfString(center_string, textPaint) / (float) bitmap_txt_group_rect.width();
+        // float bmpWidthFactor = (1 - textWidthFactor);
 
     }
 

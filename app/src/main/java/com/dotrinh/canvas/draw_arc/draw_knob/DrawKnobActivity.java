@@ -24,5 +24,6 @@ public class DrawKnobActivity extends AppCompatActivity {
         ctx = this;
         MyKnob myKnob = findViewById(R.id.knob);
         myKnob.center_bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.verified);
+        myKnob.left_bmp = BitmapFactory.decodeResource(getResources(),R.drawable.editampnote);
     }
 }
