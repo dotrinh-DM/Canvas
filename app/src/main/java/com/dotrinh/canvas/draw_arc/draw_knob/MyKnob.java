@@ -7,6 +7,8 @@ package com.dotrinh.canvas.draw_arc.draw_knob;
 
 import static android.view.MotionEvent.INVALID_POINTER_ID;
 import static com.dotrinh.canvas.tool.LogUtil.LogI;
+import static com.dotrinh.protool.StringTool.getTextBoundHeightWithBottom;
+import static com.dotrinh.protool.StringTool.getTextBoundWidthOfString;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -81,6 +83,7 @@ public class MyKnob extends View implements View.OnTouchListener {
 
     int size = 200;
     float degree = 0;
+    String center_string;
 
     @Override
     protected void onSizeChanged(int newWidth, int newHeight, int xOld, int yOld) {
@@ -89,7 +92,7 @@ public class MyKnob extends View implements View.OnTouchListener {
         int left = getWidth() / 2 - size;
         int top = getHeight() / 2 - size;
         testRect = new RectF(left, top, getWidth() / 2f + size, getHeight() / 2f + size);
-        dx_dy.right = 200;
+        dx_dy.right = max_val / 3;
         calculate_degree();
     }
 
@@ -100,7 +103,11 @@ public class MyKnob extends View implements View.OnTouchListener {
         canvas.drawArc(testRect, 135, degree, true, myPaint);
 //        canvas.drawArc(testRect.left,testRect.top,testRect.right, testRect.bottom, 45, 45, true,  myPaint);
         canvas.drawCircle(testRect.centerX(), testRect.centerY(), size - 50, circle_paint);
-        canvas.drawCircle(testRect.centerX(), testRect.centerY(), 5, textPaint);
+        // canvas.drawCircle(testRect.centerX(), testRect.centerY(), 5, textPaint);
+        //center text
+        canvas.drawText(center_string,
+                (testRect.centerX() - getTextBoundWidthOfString(center_string, textPaint) / 2f),
+                (testRect.top + (testRect.height() / 2f + getTextBoundHeightWithBottom(center_string, textPaint) / 2f)), textPaint);
     }
 
     private Point downPt = new Point(); //must be global
@@ -115,11 +122,14 @@ public class MyKnob extends View implements View.OnTouchListener {
     EVENT_STAT stat = EVENT_STAT.NONE;
 
     int min_val = 0;
-    int max_val = 499;
+    int max_val = 598;
+    // int max_val = 939 - 599;
+    // int max_val = (962 - 940)*20;
     Rect dx_dy = new Rect();
 
-    public void calculate_degree(){
+    public void calculate_degree() {
         degree = (dx_dy.right / (float) max_val) * (405 - 135);
+        center_string = String.valueOf(Math.round(degree));
     }
 
     @Override
@@ -171,7 +181,7 @@ public class MyKnob extends View implements View.OnTouchListener {
 
                         dx_dy.right += dX;//important
                         dx_dy.top += dY;//important
-                         if (realX < downPt.x) {
+                        if (realX < downPt.x) {
                             LogI("cho x be di: " + dx_dy.right);
                         } else if (realX > downPt.x) {
                             LogI("cho x to len: " + dx_dy.right);
