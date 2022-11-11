@@ -7,10 +7,11 @@ package com.dotrinh.canvas.draw_arc.draw_knob;
 
 import static android.view.MotionEvent.INVALID_POINTER_ID;
 import static com.dotrinh.canvas.tool.LogUtil.LogI;
-import static com.dotrinh.protool.StringTool.getTextBoundHeightWithBottom;
+import static com.dotrinh.canvas.tool.StringTool.getTextBoundHeightWithBottom;
 import static com.dotrinh.protool.StringTool.getTextBoundWidthOfString;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -70,6 +71,7 @@ public class MyKnob extends View implements View.OnTouchListener {
         BG_paint.setStrokeWidth(80);
         BG_paint.setStyle(Paint.Style.FILL);
         BG_paint.setColor(Color.GRAY);
+        // BG_paint.setColor(Color.parseColor("#e3e3e3"));
         BG_paint.setStrokeCap(Paint.Cap.ROUND);
         BG_paint.setAntiAlias(true);
 
@@ -79,11 +81,18 @@ public class MyKnob extends View implements View.OnTouchListener {
         circle_paint.setColor(Color.GRAY);
         circle_paint.setStrokeCap(Paint.Cap.ROUND);
         circle_paint.setAntiAlias(true);
+
+        // img shape paint
+        imgShapePaint = new Paint();
+        imgShapePaint.setAntiAlias(true);
     }
 
     int size = 200;
     float degree = 0;
     String center_string;
+    Paint imgShapePaint;
+    public Bitmap center_bitmap;
+    public Rect bitmap_rect = new Rect(0, 0, 200, 200);
 
     @Override
     protected void onSizeChanged(int newWidth, int newHeight, int xOld, int yOld) {
@@ -92,7 +101,7 @@ public class MyKnob extends View implements View.OnTouchListener {
         int left = getWidth() / 2 - size;
         int top = getHeight() / 2 - size;
         testRect = new RectF(left, top, getWidth() / 2f + size, getHeight() / 2f + size);
-        dx_dy.right = max_val / 3;
+        dx_dy.right = 0;
         calculate_degree();
     }
 
@@ -100,14 +109,24 @@ public class MyKnob extends View implements View.OnTouchListener {
     protected void onDraw(Canvas canvas) {
         canvas.drawRect(0, 0, getWidth(), getHeight(), BG_paint); //full fill
         canvas.drawRect(testRect, textPaint);
-        canvas.drawArc(testRect, 135, degree, true, myPaint);
-//        canvas.drawArc(testRect.left,testRect.top,testRect.right, testRect.bottom, 45, 45, true,  myPaint);
-        canvas.drawCircle(testRect.centerX(), testRect.centerY(), size - 50, circle_paint);
-        // canvas.drawCircle(testRect.centerX(), testRect.centerY(), 5, textPaint);
+        canvas.drawArc(testRect, 135, degree, true, myPaint);//realtime
+        canvas.drawCircle(testRect.centerX(), testRect.centerY(), size - 50, circle_paint); //big circle layer
+        // canvas.drawCircle(testRect.centerX(), testRect.centerY(), 5, textPaint); //test dot
+
         //center text
-        canvas.drawText(center_string,
-                (testRect.centerX() - getTextBoundWidthOfString(center_string, textPaint) / 2f),
-                (testRect.top + (testRect.height() / 2f + getTextBoundHeightWithBottom(center_string, textPaint) / 2f)), textPaint);
+        // float xTxt = testRect.centerX() - getTextBoundWidthOfString(center_string, textPaint) / 2f;
+        // float yTxt = (testRect.top + (testRect.height() / 2f + getTextBoundHeightWithBottom(center_string, textPaint) / 2f));
+        // canvas.drawText(center_string, xTxt, yTxt, textPaint);
+
+        //center image
+        float xBmp = testRect.centerX() - bitmap_rect.width() / 2f;
+        float yBmp = testRect.centerY() - bitmap_rect.height() / 2f;
+        bitmap_rect = new Rect((int) xBmp, (int) yBmp, (int) (xBmp + bitmap_rect.width()), (int) (yBmp + bitmap_rect.height()));
+        canvas.drawRect(bitmap_rect, textPaint);
+        canvas.drawBitmap(center_bitmap, new Rect(0, 0, center_bitmap.getWidth(), center_bitmap.getHeight()), bitmap_rect, imgShapePaint);
+
+        //center image & text
+
     }
 
     private Point downPt = new Point(); //must be global
@@ -123,13 +142,13 @@ public class MyKnob extends View implements View.OnTouchListener {
 
     int min_val = 0;
     int max_val = 598;
-    // int max_val = 939 - 599;
-    // int max_val = (962 - 940)*20;
+    // int max_val = 939 - 599;//340
+    // int max_val = (962 - 940) * 30; //fake range 660 units
     Rect dx_dy = new Rect();
 
     public void calculate_degree() {
         degree = (dx_dy.right / (float) max_val) * (405 - 135);
-        center_string = String.valueOf(Math.round(degree));
+        center_string = String.valueOf(Math.round(dx_dy.right));
     }
 
     @Override
@@ -181,11 +200,11 @@ public class MyKnob extends View implements View.OnTouchListener {
 
                         dx_dy.right += dX;//important
                         dx_dy.top += dY;//important
-                        if (realX < downPt.x) {
-                            LogI("cho x be di: " + dx_dy.right);
-                        } else if (realX > downPt.x) {
-                            LogI("cho x to len: " + dx_dy.right);
-                        }
+                        // if (realX < downPt.x) {
+                        //     LogI("cho x be di: " + dx_dy.right);
+                        // } else if (realX > downPt.x) {
+                        //     LogI("cho x to len: " + dx_dy.right);
+                        // }
                         // if (realY < downPt.y) {
                         //     LogI("cho y be di");
                         // } else if (realY > downPt.y) {
@@ -197,6 +216,17 @@ public class MyKnob extends View implements View.OnTouchListener {
                         // last pos is old pos - smooth
                         downPt.x = realX;
                         downPt.y = realY;
+
+                        //---- special, send to FW
+                        int realValToSend = 0;
+                        if (max_val == 598) {
+                            realValToSend = dx_dy.right;
+                        } else if (max_val == 340) {
+                            realValToSend = 599 + dx_dy.right;
+                        } else if (max_val == 660) {
+                            realValToSend = 940 + (dx_dy.right / 30);
+                        }
+                        LogI("send------------>: " + realValToSend);
                         break;
                     }
                 }
