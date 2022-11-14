@@ -27,30 +27,20 @@ public class DrawKnobActivity extends AppCompatActivity {
         ctx = this;
         MyKnob myKnob = findViewById(R.id.knob_1);
         myKnob.relative_size = (int) convertDpToPx(70);
-        // myKnob.center_bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.verified);
-        // myKnob.left_bmp = BitmapFactory.decodeResource(getResources(), R.drawable.editampnote);
-        myKnob.current_content = MyKnob.CONTENT_TYPE.text_only;
-        // // myKnob.current_content = MyKnob.CONTENT_TYPE.img_only;
-        // // myKnob.current_content = MyKnob.CONTENT_TYPE.img_and_text;
-        if (myKnob.current_content == MyKnob.CONTENT_TYPE.text_only) {
-            float txtSize = getFitTextSizeHorizontal(myKnob.center_text_paint, myKnob.relative_size, "4000"); //calculate text font size
-            myKnob.center_text_paint.setTextSize(txtSize); //calculate text font size
-        } else if (myKnob.current_content == MyKnob.CONTENT_TYPE.img_only) {
-
-        } else if (myKnob.current_content == MyKnob.CONTENT_TYPE.img_and_text) {
-        }
+        myKnob.current_content = MyKnob.CONTENT_TYPE.TEXT_ONLY;
+        float txtSize = getFitTextSizeHorizontal(myKnob.center_text_paint, myKnob.relative_size, "4000"); //calculate text font size
+        myKnob.center_text_paint.setTextSize(txtSize); //calculate text font size
 
         MyKnob myKnob2 = findViewById(R.id.knob_2);
         myKnob2.relative_size = (int) convertDpToPx(70);
         myKnob2.center_bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.verified);
-        myKnob2.current_content = MyKnob.CONTENT_TYPE.img_only;
-
+        myKnob2.current_content = MyKnob.CONTENT_TYPE.IMG_ONLY;
 
         MyKnob myKnob3 = findViewById(R.id.knob_3);
-        myKnob3.relative_size = (int) convertDpToPx(70);
+        myKnob3.relative_size = (int) convertDpToPx(50);
         myKnob3.left_bmp = BitmapFactory.decodeResource(getResources(), R.drawable.editampnote);
-        myKnob3.current_content = MyKnob.CONTENT_TYPE.img_and_text;
-
+        myKnob3.current_content = MyKnob.CONTENT_TYPE.IMG_AND_TEXT;
+        myKnob3.invalidate();
     }
 
     public static float getFitTextSizeHorizontal(TextPaint currentPaint, float newWidth, String currentText) {
