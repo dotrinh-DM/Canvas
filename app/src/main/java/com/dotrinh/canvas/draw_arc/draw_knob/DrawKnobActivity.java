@@ -28,8 +28,6 @@ public class DrawKnobActivity extends AppCompatActivity {
         MyKnob myKnob = findViewById(R.id.knob_1);
         myKnob.relative_size = (int) convertDpToPx(70);
         myKnob.current_content = MyKnob.CONTENT_TYPE.TEXT_ONLY;
-        float txtSize = getFitTextSizeHorizontal(myKnob.center_text_paint, myKnob.relative_size, "4000"); //calculate text font size
-        myKnob.center_text_paint.setTextSize(txtSize); //calculate text font size
 
         MyKnob myKnob2 = findViewById(R.id.knob_2);
         myKnob2.relative_size = (int) convertDpToPx(70);

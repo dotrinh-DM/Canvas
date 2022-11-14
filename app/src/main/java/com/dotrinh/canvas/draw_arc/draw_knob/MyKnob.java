@@ -6,6 +6,7 @@
 package com.dotrinh.canvas.draw_arc.draw_knob;
 
 import static android.view.MotionEvent.INVALID_POINTER_ID;
+import static com.dotrinh.canvas.draw_arc.draw_knob.DrawKnobActivity.getFitTextSizeHorizontal;
 import static com.dotrinh.canvas.tool.LogUtil.LogI;
 import static com.dotrinh.canvas.tool.StringTool.getTextBoundHeightWithBottom;
 
@@ -131,9 +132,10 @@ public class MyKnob extends View implements View.OnTouchListener {
     public int x_Grp;
     public int y_Grp;
 
-    public Bitmap left_bmp;
+    public Bitmap left_bmp; //todo: must be a square size (crop before put to project)
     public Rect left_bmp_rect;
 
+    public String right_string = "4000";
     public TextPaint right_text_paint;
     public Rect right_txt_rect;
     public float y_baseline_txt;
@@ -149,7 +151,11 @@ public class MyKnob extends View implements View.OnTouchListener {
         rect_outer = new RectF(left, top, right, bottom); //hình vuông ngoài cùng
         radius = relative_size - 40;
 
-        //center img case
+        //only center txt case
+        float txtSize_1 = getFitTextSizeHorizontal(center_text_paint, relative_size, center_string); //calculate text font size
+        center_text_paint.setTextSize(txtSize_1); //calculate text font size
+
+        //only center img case
         center_bmp_rect = new Rect(0, 0, (int) (relative_size / 1.2), (int) (relative_size / 1.2));
 
         //left img & txt case
@@ -172,7 +178,7 @@ public class MyKnob extends View implements View.OnTouchListener {
             float right_area_width = bmp_txt_grp_rect.width() * 0.5f;
 
             //calculate text font size
-            float txtSize = DrawKnobActivity.getFitTextSizeHorizontal(right_text_paint, right_area_width, "123");
+            float txtSize = getFitTextSizeHorizontal(right_text_paint, right_area_width, "123");
             right_text_paint.setTextSize(txtSize); //calculate text font size
 
             y_baseline_txt = (bmp_txt_grp_rect.centerY() + getTextBoundHeightWithBottom(center_string, right_text_paint) / 2f); //draw from baseline
@@ -187,7 +193,7 @@ public class MyKnob extends View implements View.OnTouchListener {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawRect(0, 0, getWidth(), getHeight(), BG_paint); //full fill
-        canvas.drawRect(rect_outer, center_text_paint);
+        // canvas.drawRect(rect_outer, center_text_paint); //todo: debug
         canvas.drawArc(rect_outer, 135, degree, true, progress_realtime_paint);//realtime changes
         canvas.drawCircle(rect_outer.centerX(), rect_outer.centerY(), radius, circle_paint); //big circle layer
         // canvas.drawCircle(rect_outer.centerX(), rect_outer.centerY(), 15, center_text_paint); //test dot
@@ -204,27 +210,28 @@ public class MyKnob extends View implements View.OnTouchListener {
             float xBmp = rect_outer.centerX() - center_bmp_rect.width() / 2f;
             float yBmp = rect_outer.centerY() - center_bmp_rect.height() / 2f;
             center_bmp_rect = new Rect((int) xBmp, (int) yBmp, (int) (xBmp + center_bmp_rect.width()), (int) (yBmp + center_bmp_rect.height()));
-            canvas.drawRect(center_bmp_rect, center_text_paint);
+            // canvas.drawRect(center_bmp_rect, center_text_paint); //todo: debug
             canvas.drawBitmap(center_bitmap, new Rect(0, 0, center_bitmap.getWidth(), center_bitmap.getHeight()), center_bmp_rect, img_shape_paint);
         }
 
         //-----------------left image & right text GROUP case
         if (current_content == CONTENT_TYPE.IMG_AND_TEXT) {
-            canvas.drawRect(bmp_txt_grp_rect, center_text_paint);
+            // canvas.drawRect(bmp_txt_grp_rect, center_text_paint);//todo: debug
             //center line
-            canvas.drawLine(bmp_txt_grp_rect.centerX(), bmp_txt_grp_rect.top, bmp_txt_grp_rect.centerX(), bmp_txt_grp_rect.bottom, line);
+            // canvas.drawLine(bmp_txt_grp_rect.centerX(), bmp_txt_grp_rect.top, bmp_txt_grp_rect.centerX(), bmp_txt_grp_rect.bottom, line); //todo: debug
 
             //draw left bmp
-            canvas.drawRect(left_bmp_rect, img_shape_paint);//black bg
+            // canvas.drawRect(left_bmp_rect, img_shape_paint);//black bg //todo: debug
             canvas.drawBitmap(left_bmp, new Rect(0, 0, left_bmp.getWidth(), left_bmp.getHeight()), left_bmp_rect, img_shape_paint);
 
             //right text
-            canvas.drawRect(right_txt_rect, img_shape_paint);//black bg
+            // canvas.drawRect(right_txt_rect, img_shape_paint);//black bg //todo: debug
             canvas.drawText("x " + center_string, bmp_txt_grp_rect.centerX(), y_baseline_txt, right_text_paint);
         }
     }
 
-    //----------------- TOUCH LOGIC -----------------
+    //------------------------------------------------------------------- TOUCH LOGIC -------------------------------------------------------------------
+
     private Point downPt = new Point(); //must be global
     private Point realtimePt = new Point(); //must be global
     private int mActivePointerID = INVALID_POINTER_ID;
@@ -255,7 +262,7 @@ public class MyKnob extends View implements View.OnTouchListener {
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        LogI("touch");
+        LogI("touch: " + event.getAction());
 
         final int action = event.getAction();
         switch (action & MotionEvent.ACTION_MASK) {

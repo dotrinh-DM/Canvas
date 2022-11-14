@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:visibility="invisible"/>
+        android:visibility="visible"/>
 
     <com.dotrinh.canvas.draw_arc.draw_knob.MyKnob
         android:id="@+id/knob_2"
@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/knob_1"
-        android:visibility="invisible"/>
+        android:visibility="visible"/>
 
     <com.dotrinh.canvas.draw_arc.draw_knob.MyKnob
         android:id="@+id/knob_3"
