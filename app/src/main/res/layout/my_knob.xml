@@ -14,26 +14,32 @@
     <com.dotrinh.canvas.draw_arc.draw_knob.MyKnob
         android:id="@+id/knob_1"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="235dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/knob_2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="visible"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.dotrinh.canvas.draw_arc.draw_knob.MyKnob
         android:id="@+id/knob_2"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="235dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/knob_3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/knob_1"
-        android:visibility="visible"/>
+        app:layout_constraintTop_toBottomOf="@+id/knob_1" />
 
     <com.dotrinh.canvas.draw_arc.draw_knob.MyKnob
         android:id="@+id/knob_3"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="236dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/knob_2" />
 

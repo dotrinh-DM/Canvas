@@ -228,8 +228,8 @@ public class MyKnob extends View implements View.OnTouchListener {
 
             //right text
             // canvas.drawRect(right_txt_rect, img_shape_paint);//black bg //todo: debug
-            // canvas.drawText("x " + center_string, bmp_txt_grp_rect.centerX(), y_baseline_txt, right_text_paint);
-            canvas.drawText( center_string, bmp_txt_grp_rect.centerX(), y_baseline_txt, right_text_paint);
+            canvas.drawText("x " + center_string, bmp_txt_grp_rect.centerX(), y_baseline_txt, right_text_paint);
+            // canvas.drawText( center_string, bmp_txt_grp_rect.centerX(), y_baseline_txt, right_text_paint);
         }
     }
 
@@ -253,9 +253,9 @@ public class MyKnob extends View implements View.OnTouchListener {
     EVENT_STAT stat = EVENT_STAT.NONE;
 
     int min_val = 0;
-    // int max_val = 9;
+    int max_val = 598;
     // int max_val = 939 - 599;//340
-    int max_val = (962 - 940) * 130; //fake range 660 units
+    // int max_val = (962 - 940) * 30; //fake range 660 units
     Distance_x_y distance_histri = new Distance_x_y();
 
     public void calculate_degree() {
