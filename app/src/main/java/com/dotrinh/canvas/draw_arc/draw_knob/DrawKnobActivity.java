@@ -35,10 +35,10 @@ public class DrawKnobActivity extends AppCompatActivity {
         myKnob2.current_content = MyKnob.CONTENT_TYPE.IMG_ONLY;
 
         MyKnob myKnob3 = findViewById(R.id.knob_3);
-        myKnob3.relative_size = (int) convertDpToPx(50);
+        myKnob3.relative_size = (int) convertDpToPx(70);
         myKnob3.left_bmp = BitmapFactory.decodeResource(getResources(), R.drawable.editampnote);
         myKnob3.current_content = MyKnob.CONTENT_TYPE.IMG_AND_TEXT;
-        myKnob3.invalidate();
+        // myKnob3.invalidate();
     }
 
     public static float getFitTextSizeHorizontal(TextPaint currentPaint, float newWidth, String currentText) {

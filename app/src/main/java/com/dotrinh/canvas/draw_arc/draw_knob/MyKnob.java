@@ -73,21 +73,22 @@ public class MyKnob extends View implements View.OnTouchListener {
         right_text_paint = new TextPaint();
         right_text_paint.setTypeface(Typeface.SERIF);
         right_text_paint.setStrokeWidth(7);
-        right_text_paint.setTextSize(Tool.convertSpToPx(getContext(), 40));
+        right_text_paint.setTextSize(10);
         right_text_paint.setAntiAlias(true);
         right_text_paint.setPathEffect(null);
         right_text_paint.setColor(Color.BLUE);
         right_text_paint.setStyle(Paint.Style.STROKE);
 
         progress_realtime_paint = new Paint();
-        progress_realtime_paint.setColor(getResources().getColor(R.color.white, null));
+        // progress_realtime_paint.setColor(getResources().getColor(R.color.white, null));
+        progress_realtime_paint.setColor(Color.parseColor("#F49D1A"));
         progress_realtime_paint.setAntiAlias(true);
 
         BG_paint = new Paint();
         BG_paint.setStrokeWidth(80);
         BG_paint.setStyle(Paint.Style.FILL);
-        BG_paint.setColor(Color.GRAY);
-        // BG_paint.setColor(Color.parseColor("#e3e3e3"));
+        // BG_paint.setColor(Color.GRAY);
+        BG_paint.setColor(Color.parseColor("#e3e3e3"));
         BG_paint.setStrokeCap(Paint.Cap.ROUND);
         BG_paint.setAntiAlias(true);
 
@@ -178,7 +179,7 @@ public class MyKnob extends View implements View.OnTouchListener {
             float right_area_width = bmp_txt_grp_rect.width() * 0.5f;
 
             //calculate text font size
-            float txtSize = getFitTextSizeHorizontal(right_text_paint, right_area_width, "123");
+            float txtSize = getFitTextSizeHorizontal(right_text_paint, right_area_width, "0000");
             right_text_paint.setTextSize(txtSize); //calculate text font size
 
             y_baseline_txt = (bmp_txt_grp_rect.centerY() + getTextBoundHeightWithBottom(center_string, right_text_paint) / 2f); //draw from baseline
@@ -196,7 +197,7 @@ public class MyKnob extends View implements View.OnTouchListener {
         // canvas.drawRect(rect_outer, center_text_paint); //todo: debug
         canvas.drawArc(rect_outer, 135, degree, true, progress_realtime_paint);//realtime changes
         canvas.drawCircle(rect_outer.centerX(), rect_outer.centerY(), radius, circle_paint); //big circle layer
-        // canvas.drawCircle(rect_outer.centerX(), rect_outer.centerY(), 15, center_text_paint); //test dot
+        // canvas.drawCircle(rect_outer.centerX(), rect_outer.centerY(), 15, center_text_paint); //test point
 
         //-----------------center single text case
         if (current_content == CONTENT_TYPE.TEXT_ONLY) { //text length may be changed
@@ -217,6 +218,7 @@ public class MyKnob extends View implements View.OnTouchListener {
         //-----------------left image & right text GROUP case
         if (current_content == CONTENT_TYPE.IMG_AND_TEXT) {
             // canvas.drawRect(bmp_txt_grp_rect, center_text_paint);//todo: debug
+
             //center line
             // canvas.drawLine(bmp_txt_grp_rect.centerX(), bmp_txt_grp_rect.top, bmp_txt_grp_rect.centerX(), bmp_txt_grp_rect.bottom, line); //todo: debug
 
@@ -226,7 +228,8 @@ public class MyKnob extends View implements View.OnTouchListener {
 
             //right text
             // canvas.drawRect(right_txt_rect, img_shape_paint);//black bg //todo: debug
-            canvas.drawText("x " + center_string, bmp_txt_grp_rect.centerX(), y_baseline_txt, right_text_paint);
+            // canvas.drawText("x " + center_string, bmp_txt_grp_rect.centerX(), y_baseline_txt, right_text_paint);
+            canvas.drawText( center_string, bmp_txt_grp_rect.centerX(), y_baseline_txt, right_text_paint);
         }
     }
 
@@ -252,7 +255,7 @@ public class MyKnob extends View implements View.OnTouchListener {
     int min_val = 0;
     // int max_val = 9;
     // int max_val = 939 - 599;//340
-    int max_val = (962 - 940) * 30; //fake range 660 units
+    int max_val = (962 - 940) * 130; //fake range 660 units
     Distance_x_y distance_histri = new Distance_x_y();
 
     public void calculate_degree() {
