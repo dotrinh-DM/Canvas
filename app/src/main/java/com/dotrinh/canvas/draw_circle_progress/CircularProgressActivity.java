@@ -3,7 +3,7 @@
  * Copyright (c) 2020. dotr Inc. All rights reserved.
  */
 
-package com.dotrinh.canvas.circle_progress;
+package com.dotrinh.canvas.draw_circle_progress;
 
 
 import static com.dotrinh.protool.StringTool.getTextBoundHeightWithBottom;
