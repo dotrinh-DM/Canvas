@@ -24,9 +24,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.dotrinh.canvas.R;
 import com.dotrinh.canvas.tool.StringTool;
-import com.dotrinh.canvas.tool.Tool;
 
 public class MyKnob extends View implements View.OnTouchListener {
 
@@ -167,24 +165,26 @@ public class MyKnob extends View implements View.OnTouchListener {
         int h_Grp = y_Grp + bmp_txt_grp_rect.height();
         bmp_txt_grp_rect = new Rect(x_Grp, y_Grp, w_Grp, h_Grp);//update right, bottom
 
-        //img
-        if (left_bmp != null) {
-            float left_area_width = bmp_txt_grp_rect.width() * 0.5f;
-            left_bmp = Bitmap.createScaledBitmap(left_bmp, (int) left_area_width, (int) left_area_width, false);
-            float middle_y = bmp_txt_grp_rect.centerY() - left_bmp.getHeight() / 2f; //draw from top - left
-            left_bmp_rect = new Rect((int) (bmp_txt_grp_rect.centerX() - left_area_width), (int) middle_y, bmp_txt_grp_rect.centerX(), (int) (middle_y + left_bmp.getHeight()));
-        }
-        //config right text
-        if (left_bmp_rect != null) {
-            float right_area_width = bmp_txt_grp_rect.width() * 0.5f;
+            //region config left img
+            if (left_bmp != null) {
+                float left_area_width = bmp_txt_grp_rect.width() * 0.5f;
+                left_bmp = Bitmap.createScaledBitmap(left_bmp, (int) left_area_width, (int) left_area_width, false);
+                float middle_y = bmp_txt_grp_rect.centerY() - left_bmp.getHeight() / 2f; //draw from top - left
+                left_bmp_rect = new Rect((int) (bmp_txt_grp_rect.centerX() - left_area_width), (int) middle_y, bmp_txt_grp_rect.centerX(), (int) (middle_y + left_bmp.getHeight()));
+            }
+            //endregion
+            //region config right text
+            if (left_bmp_rect != null) {
+                float right_area_width = bmp_txt_grp_rect.width() * 0.5f;
 
-            //calculate text font size
-            float txtSize = getFitTextSizeHorizontal(right_text_paint, right_area_width, "0000");
-            right_text_paint.setTextSize(txtSize); //calculate text font size
+                //calculate text font size
+                float txtSize = getFitTextSizeHorizontal(right_text_paint, right_area_width, "0000");//dummy text
+                right_text_paint.setTextSize(txtSize); //calculate text font size
 
-            y_baseline_txt = (bmp_txt_grp_rect.centerY() + getTextBoundHeightWithBottom(center_string, right_text_paint) / 2f); //draw from baseline
-            right_txt_rect = new Rect(bmp_txt_grp_rect.centerX(), left_bmp_rect.top, bmp_txt_grp_rect.centerX() + (int) right_area_width, (int) y_baseline_txt);
-        }
+                y_baseline_txt = (bmp_txt_grp_rect.centerY() + getTextBoundHeightWithBottom(center_string, right_text_paint) / 2f); //draw from baseline
+                right_txt_rect = new Rect(bmp_txt_grp_rect.centerX(), left_bmp_rect.top, bmp_txt_grp_rect.centerX() + (int) right_area_width, (int) y_baseline_txt);
+            }
+            //endregion
 
         // show default knob val
         distance_histri.dx = (int) (0.99 * max_val);
@@ -245,7 +245,7 @@ public class MyKnob extends View implements View.OnTouchListener {
     }
 
     //class
-    class Distance_x_y {
+    static class Distance_x_y {
         float dx;
         float dy;
     }
