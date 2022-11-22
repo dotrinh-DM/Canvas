@@ -41,6 +41,7 @@ public class MyKnob extends View implements View.OnTouchListener {
 
     public CONTENT_TYPE current_content = CONTENT_TYPE.TEXT_ONLY;
 
+    //region constructor
     public MyKnob(Context context) {
         super(context);
         initialize();
@@ -55,6 +56,7 @@ public class MyKnob extends View implements View.OnTouchListener {
         super(context, attrs);
         initialize();
     }
+    //endregion
 
     private void initialize() {
         setOnTouchListener(this);
