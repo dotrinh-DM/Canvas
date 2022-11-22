@@ -27,4 +27,17 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.26" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LED draw"
+        android:layout_marginTop="100dp"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline"
+        tools:layout_editor_absoluteX="209dp"
+        tools:layout_editor_absoluteY="142dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

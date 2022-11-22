@@ -20,7 +20,7 @@ import android.view.View;
 import com.dotrinh.canvas.tool.StringTool;
 import com.dotrinh.canvas.tool.Tool;
 
-public class DrawText extends View {
+public class MyTextHorizontal extends View {
 
     TextPaint textPaint;
     static Paint RECT_PAINT;
@@ -30,17 +30,17 @@ public class DrawText extends View {
 //    private String textStr = "Olivia\n                   \nSmith";
 //    private String textStr = " ";
 
-    public DrawText(Context context) {
+    public MyTextHorizontal(Context context) {
         super(context);
         initialize();
     }
 
-    public DrawText(Context context, AttributeSet attrs, int defStyle) {
+    public MyTextHorizontal(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initialize();
     }
 
-    public DrawText(Context context, AttributeSet attrs) {
+    public MyTextHorizontal(Context context, AttributeSet attrs) {
         super(context, attrs);
         initialize();
     }

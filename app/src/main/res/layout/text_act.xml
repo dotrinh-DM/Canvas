@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".draw_LED.LED_MainActivity">
 
-    <com.dotrinh.canvas.draw_text.DrawText
+    <com.dotrinh.canvas.draw_text.MyTextHorizontal
         android:id="@+id/Level"
         android:layout_width="0dp"
         android:layout_height="300dp"
@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.dotrinh.canvas.draw_text.DrawTextVertical
+    <com.dotrinh.canvas.draw_text.MyTextVertical
         android:id="@+id/Level2"
         android:layout_width="0dp"
         android:layout_height="0dp"

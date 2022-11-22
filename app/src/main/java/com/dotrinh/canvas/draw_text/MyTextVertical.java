@@ -18,14 +18,13 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.dotrinh.canvas.tool.Tool;
-import com.dotrinh.protool.StringTool;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.dotrinh.protool.StringTool.findMaxWidthOfInTextBound;
 
-public class DrawTextVertical extends View {
+public class MyTextVertical extends View {
 
     TextPaint textPaint;
     static Paint RECT_PAINT;
@@ -34,17 +33,17 @@ public class DrawTextVertical extends View {
     //    private String textStr = "あえおaby";
     private String textStr = "あいえお\n高田様";
 
-    public DrawTextVertical(Context context) {
+    public MyTextVertical(Context context) {
         super(context);
         initialize();
     }
 
-    public DrawTextVertical(Context context, AttributeSet attrs, int defStyle) {
+    public MyTextVertical(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initialize();
     }
 
-    public DrawTextVertical(Context context, AttributeSet attrs) {
+    public MyTextVertical(Context context, AttributeSet attrs) {
         super(context, attrs);
         initialize();
     }

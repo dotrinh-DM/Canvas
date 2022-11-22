@@ -25,6 +25,7 @@ public class DrawKnobActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_knob);
         ctx = this;
+        // int testSize = 60; //responsive test
         int testSize = 110;
         MyKnob myKnob = findViewById(R.id.knob_1);
         myKnob.relative_size = (int) convertDpToPx(testSize);
