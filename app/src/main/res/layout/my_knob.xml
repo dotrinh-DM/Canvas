@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="235dp"
         android:visibility="visible"
+        app:is_anim="true"
         app:layout_constraintBottom_toTopOf="@+id/knob_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

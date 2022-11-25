@@ -11,6 +11,7 @@ import static com.dotrinh.canvas.tool.LogUtil.LogI;
 import static com.dotrinh.canvas.tool.StringTool.getTextBoundHeightWithBottom;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -24,6 +25,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.dotrinh.canvas.R;
 import com.dotrinh.canvas.tool.StringTool;
 
 public class MyKnob extends View implements View.OnTouchListener {
@@ -43,19 +45,25 @@ public class MyKnob extends View implements View.OnTouchListener {
 
     //region constructor
     public MyKnob(Context context) {
-        super(context);
-        initialize();
+        this(context, null);
+    }
+
+    public MyKnob(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
     }
 
     public MyKnob(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        if (attrs != null) {
+            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.MyKnob, 0, 0);
+            boolean is_anima = a.getBoolean(R.styleable.MyKnob_is_anim, false);
+            LogI("MyKnob: " + is_anima);
+            a.recycle();
+        }
         initialize();
     }
 
-    public MyKnob(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        initialize();
-    }
+
     //endregion
 
     private void initialize() {
