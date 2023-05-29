@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Canvas</string>
+    <string name="NameRule" translatable="false">! #$%~&amp;\'()+,-0123456789;=@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{}.</string>
 </resources>

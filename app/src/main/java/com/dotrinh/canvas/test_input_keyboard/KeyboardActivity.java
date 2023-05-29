@@ -9,6 +9,7 @@ import static com.dotrinh.canvas.tool.LogUtil.LogI;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -31,10 +32,11 @@ public class KeyboardActivity extends AppCompatActivity {
         setContentView(R.layout.test_keyboard);
         ctx = this;
         final EditText mEditText = findViewById(R.id.editTextTextPersonName);
+        mEditText.setFilters(new InputFilter[] { filter });
         mEditText.setOnEditorActionListener((v, actionId, event) -> {
             boolean handled = false;
-            // LogI("11111111111 a enter");
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
+            LogI("11111111111 a enter");
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
                 LogI("3333333333 a enter " + v.getText());
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
@@ -47,5 +49,13 @@ public class KeyboardActivity extends AppCompatActivity {
             return handled;
         });
     }
+
+    private InputFilter filter = (source, start, end, dest, dstart, dend) -> {
+        String blockCharacterSet = getString(R.string.NameRule);
+        if (source != null && !blockCharacterSet.contains(("" + source))) {
+            return "";
+        }
+        return null;
+    };
 
 }
