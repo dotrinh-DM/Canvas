@@ -5,11 +5,13 @@
 
 package com.dotrinh.canvas.draw_scale;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dotrinh.canvas.R;
 import com.dotrinh.canvas.databinding.ScaleLayoutBinding;
 
 public class ScaleActivity extends AppCompatActivity {
@@ -19,5 +21,7 @@ public class ScaleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         @NonNull ScaleLayoutBinding binding = ScaleLayoutBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        // ZoomableView2 zoomableView2 = binding.zoom;
+        // zoomableView2.invalidate();
     }
 }

@@ -13,7 +13,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -22,10 +21,7 @@ import android.view.View;
 
 import com.dotrinh.canvas.tool.Tool;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-public class ZoomableView extends View {
+public class No_Use_ZoomableView extends View {
 
     private float scaleFactor = 1.0f;
     private float focalX;
@@ -34,17 +30,17 @@ public class ZoomableView extends View {
     TextPaint textPaint;
 
 
-    public ZoomableView(Context context) {
+    public No_Use_ZoomableView(Context context) {
         super(context);
         initialize();
     }
 
-    public ZoomableView(Context context, AttributeSet attrs, int defStyle) {
+    public No_Use_ZoomableView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initialize();
     }
 
-    public ZoomableView(Context context, AttributeSet attrs) {
+    public No_Use_ZoomableView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initialize();
     }
@@ -58,14 +54,15 @@ public class ZoomableView extends View {
         textPaint.setPathEffect(null);
         textPaint.setColor(Color.BLUE);
         textPaint.setStyle(Paint.Style.STROKE);
-        Timer timer = new Timer();
+
+        /*Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 scaleFactor += 0.001;
                 invalidate();
             }
-        }, 0, 10);
+        }, 0, 10);*/
 
     }
 
@@ -87,13 +84,11 @@ public class ZoomableView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        // Get the touch coordinates
         float x = event.getX();
         float y = event.getY();
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_MOVE:
-                // Calculate the scaling factor based on the distance moved
                 float dx = x - focalX;
                 float dy = y - focalY;
                 float distance = (float) Math.sqrt(dx * dx + dy * dy);
