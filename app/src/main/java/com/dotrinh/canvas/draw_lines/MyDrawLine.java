@@ -5,6 +5,9 @@
 
 package com.dotrinh.canvas.draw_lines;
 
+import static com.dotrinh.canvas.tool.StringTool.getTextBoundHeightWithBottom;
+import static com.dotrinh.canvas.tool.StringTool.getTextBoundWidthOfString;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -15,6 +18,7 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.dotrinh.canvas.tool.StringTool;
 import com.dotrinh.canvas.tool.Tool;
 
 public class MyDrawLine extends View {
@@ -106,18 +110,20 @@ public class MyDrawLine extends View {
     }
 
     void drawImprove(Canvas canvas) {
-        float[] maXArr = new float[120];
+        float[] maXArr = new float[192];
         int startX1 = 20;
         for (int i = 0; i < maXArr.length; i += 4) {
             maXArr[i] = startX1;
-            maXArr[i + 1] = centerY;
+            maXArr[i + 1] = centerY - 100;
             maXArr[i + 2] = startX1;
-            maXArr[i + 3] = centerY - (int) ((Math.random() * (300)));
+            maXArr[i + 3] = centerY - 100 - (int) ((Math.random() * (300)));
             startX1 += 30;
         }
         canvas.drawLines(maXArr, textPaint);
 
-        float[] minArr = new float[120];
+        canvas.drawText("dotrinh", getWidth() / 2 - getTextBoundWidthOfString("dotrinh", textPaint) / 2f, centerY - getTextBoundHeightWithBottom("dotrinh",textPaint)/2f, textPaint);
+
+        float[] minArr = new float[192];
         int startX2 = 20;
         for (int i = 0; i < minArr.length; i += 4) {
             minArr[i] = startX2;
