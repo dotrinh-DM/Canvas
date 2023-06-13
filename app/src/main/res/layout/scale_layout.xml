@@ -9,20 +9,17 @@
         android:id="@+id/zoom"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        android:background="#BAB6B6"
+        android:background="#0834B5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:src="@drawable/nongthonvn" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#72F44336"
+            android:src="@drawable/test_img" />
     </com.dotrinh.canvas.draw_scale.ZoomViewGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

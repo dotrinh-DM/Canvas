@@ -169,7 +169,7 @@ public class ZoomViewGroup extends ViewGroup {
         event.setLocation(mOnTouchEventWorkingArray[0], mOnTouchEventWorkingArray[1]);
 
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
-            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_DOWN: {
                 savedMatrix.set(matrix);
                 mode = DRAG;
                 lastEvent = null;
@@ -190,7 +190,8 @@ public class ZoomViewGroup extends ViewGroup {
                 }
                 start.set(event.getX(), event.getY());
                 break;
-            case MotionEvent.ACTION_POINTER_DOWN:
+            }
+            case MotionEvent.ACTION_POINTER_DOWN: {
                 oldDist = spacing(event);
                 if (oldDist > 10f) {
                     savedMatrix.set(matrix);
@@ -203,12 +204,14 @@ public class ZoomViewGroup extends ViewGroup {
                 lastEvent[2] = event.getY(0);
                 lastEvent[3] = event.getY(1);
                 break;
+            }
             case MotionEvent.ACTION_UP:
-            case MotionEvent.ACTION_POINTER_UP:
+            case MotionEvent.ACTION_POINTER_UP: {
                 mode = NONE;
                 lastEvent = null;
                 break;
-            case MotionEvent.ACTION_MOVE:
+            }
+            case MotionEvent.ACTION_MOVE: {
                 final float density = getResources().getDisplayMetrics().density;
                 if (mode == DRAG) {
                     matrix.set(savedMatrix);
@@ -237,22 +240,15 @@ public class ZoomViewGroup extends ViewGroup {
                         matrix.invert(matrixInverse);
                     }
                 }
-
                 break;
+            }
         }
-
 
         float[] values = new float[9];
         matrix.getValues(values);
 
-
-        //int x = ((int)(event.getX() - values[2]*values[Matrix.MSCALE_X]))/(int)values[0];
-        //int y = ((int)(event.getY() - values[5]*values[Matrix.MSCALE_Y]))/(int)values[4];
-
         int x = ((int) (event.getX() / values[Matrix.MSCALE_X] - (values[Matrix.MTRANS_X] / values[Matrix.MSCALE_X])));
         int y = ((int) (event.getY() / values[Matrix.MSCALE_Y] - (values[Matrix.MTRANS_Y] / values[Matrix.MSCALE_Y])));
-
-
         invalidate();
         return true;
     }
