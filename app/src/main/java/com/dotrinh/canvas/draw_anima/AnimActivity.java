@@ -5,6 +5,8 @@
 
 package com.dotrinh.canvas.draw_anima;
 
+import static com.dotrinh.canvas.tool.LogUtil.LogI;
+
 import android.animation.ValueAnimator;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -29,12 +31,13 @@ public class AnimActivity extends AppCompatActivity {
 
         animatedDrawingView = findViewById(R.id.Level);
 
-        animator = ValueAnimator.ofFloat(0f, 1100f);
+        animator = ValueAnimator.ofFloat(0f, 500);
         animator.setDuration(5000); // Animation duration in milliseconds
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 animatedDrawingView.radius = (float) animation.getAnimatedValue();
+                LogI("animatedDrawingView.radius: " + animatedDrawingView.radius);
                 animatedDrawingView.invalidate();
             }
         });
