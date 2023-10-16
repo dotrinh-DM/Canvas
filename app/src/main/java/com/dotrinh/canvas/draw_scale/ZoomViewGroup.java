@@ -151,7 +151,7 @@ public class ZoomViewGroup extends ViewGroup {
         float[] values = new float[9];
         matrix.getValues(values);
         canvas.save();
-        canvas.translate(values[Matrix.MTRANS_X], values[Matrix.MTRANS_Y]);
+        // canvas.translate(values[Matrix.MTRANS_X], values[Matrix.MTRANS_Y]);
         canvas.scale(values[Matrix.MSCALE_X], values[Matrix.MSCALE_Y]);
         super.dispatchDraw(canvas);
         canvas.restore();
