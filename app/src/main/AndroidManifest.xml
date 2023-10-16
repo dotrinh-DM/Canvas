@@ -20,7 +20,7 @@
 <!--        </activity>-->
 
 <!--              <activity android:name=".test_input_keyboard.KeyboardActivity">-->
-                  <activity android:name=".draw_scale.ScaleActivity">
+                  <activity android:name=".test_replaceView.ReplaceViewActivity">
 <!--                  <activity android:name=".draw_bitmap.BMP_MainActivity">-->
 <!--              <activity android:name=".draw_arc.draw_knob.DrawKnobActivity">-->
 <!--             <activity android:name="com.dotrinh.canvas.draw_arc.DrawArcActivity" >-->
